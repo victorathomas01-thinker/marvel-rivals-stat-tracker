@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marvel Rivals Stat Tracker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <h1>Marvel Rivals Stat Tracker</h1>
+
+    <label for="playerName">Tracker.gg player name</label>
+    <div class="settings-row">
+      <input id="playerName" type="text" autocomplete="off">
+      <button id="savePlayer" type="button">Save</button>
+    </div>
+    <p id="saveStatus" class="status" aria-live="polite"></p>
+
+    <section>
+      <div class="section-heading">
+        <h2>Top Threats</h2>
+        <span id="matchCount"></span>
+      </div>
+      <ol id="threatList"></ol>
+    </section>
+
+    <div class="actions">
+      <button id="exportJson" type="button">Export JSON</button>
+      <button id="exportCsv" type="button">Export CSV</button>
+      <button id="clearData" class="danger" type="button">Clear Data</button>
+    </div>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>
