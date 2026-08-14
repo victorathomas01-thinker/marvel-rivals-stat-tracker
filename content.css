@@ -1,0 +1,75 @@
+#hero-tracker-overlay {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 2147483647;
+  width: min(340px, calc(100vw - 32px));
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 14px;
+  background: rgba(21, 20, 38, 0.97);
+  color: #fff;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  font: 14px/1.4 Arial, sans-serif;
+}
+
+#hero-tracker-overlay h2 {
+  margin: 0 36px 6px 0;
+  font-size: 20px;
+}
+
+.hero-tracker-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  border: 0;
+  background: transparent;
+  color: #d0cfe5;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.hero-tracker-message,
+.hero-tracker-note {
+  margin: 6px 0 12px;
+  color: #d0cfe5;
+}
+
+#hero-tracker-overlay ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#hero-tracker-overlay li {
+  display: grid;
+  grid-template-columns: 28px 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.hero-tracker-rank {
+  color: #fcd92d;
+  font-weight: 700;
+}
+
+.hero-tracker-hero {
+  font-weight: 700;
+}
+
+.hero-tracker-score {
+  color: #fcd92d;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-tracker-empty {
+  display: block !important;
+  color: #d0cfe5;
+}
+
+.hero-tracker-note {
+  margin-bottom: 0;
+  font-size: 12px;
+}
