@@ -110,6 +110,16 @@ function rankThreats(stats) {
     );
 }
 
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
 function renderOverlay(stats, message) {
   document.getElementById("hero-tracker-overlay")?.remove();
 
@@ -121,7 +131,7 @@ function renderOverlay(stats, message) {
     ? threats.map(([hero, data], index) => `
         <li>
           <span class="hero-tracker-rank">${index + 1}</span>
-          <span class="hero-tracker-hero">${hero}</span>
+          <span class="hero-tracker-hero">${escapeHtml(hero)}</span>
           <span class="hero-tracker-score">${data.weightedLosses.toFixed(1)}</span>
         </li>`).join("")
     : "<li class=\"hero-tracker-empty\">No losses recorded yet.</li>";
@@ -129,7 +139,7 @@ function renderOverlay(stats, message) {
   overlay.innerHTML = `
     <button class="hero-tracker-close" type="button" aria-label="Close">×</button>
     <h2>Top Threats</h2>
-    <p class="hero-tracker-message">${message}</p>
+    <p class="hero-tracker-message">${escapeHtml(message)}</p>
     <ol>${threatMarkup}</ol>
     <p class="hero-tracker-note">Score = losses, with MVP/SVP rows weighted 1.2×.</p>
   `;
