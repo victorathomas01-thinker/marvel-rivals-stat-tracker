@@ -1,0 +1,14 @@
+{
+  "name": "marvel-rivals-stat-tracker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chrome extension for tracking enemy hero threats in Marvel Rivals",
+  "scripts": {
+    "check": "node --check content.js && node --check popup.js",
+    "test": "node --test tests/*.test.cjs",
+    "verify": "npm run check && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
