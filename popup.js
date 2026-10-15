@@ -32,6 +32,16 @@ function toCsv(stats) {
   return rows.map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(",")).join("\n");
 }
 
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
 function renderStats(stats, processedMatches) {
   const list = document.getElementById("threatList");
   const ranked = rankThreats(stats).slice(0, 5);
@@ -47,7 +57,7 @@ function renderStats(stats, processedMatches) {
       const item = document.createElement("li");
       item.innerHTML = `
         <span class="rank">${index + 1}</span>
-        <span class="hero">${hero}</span>
+        <span class="hero">${escapeHtml(hero)}</span>
         <span class="score">${data.weightedLosses.toFixed(1)}</span>
       `;
       list.appendChild(item);
