@@ -6,7 +6,7 @@ const path = require("node:path");
 
 function loadScript(filename) {
   const sandbox = {
-    window: { setInterval() {} },
+    window: { setInterval() {}, setTimeout() {} },
     chrome: { storage: { local: { get() {} } } },
     structuredClone
   };
