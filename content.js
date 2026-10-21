@@ -216,14 +216,20 @@ function waitForMatchData() {
   let attempts = 0;
   const maxAttempts = 20;
 
-  const timer = window.setInterval(async () => {
+  // Schedule the next attempt only after the previous storage operation finishes.
+  // setInterval can start a second read/write before the first has saved its match ID.
+  const poll = async () => {
     attempts += 1;
-    const processed = await processMatch();
-
-    if (processed || attempts >= maxAttempts) {
-      window.clearInterval(timer);
+    try {
+      if (await processMatch()) return;
+    } catch (error) {
+      console.warn("Hero Tracker: match processing failed.", error);
     }
-  }, 500);
+
+    if (attempts < maxAttempts) window.setTimeout(poll, 500);
+  };
+
+  window.setTimeout(poll, 500);
 }
 
 waitForMatchData();
