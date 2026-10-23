@@ -24,12 +24,19 @@ function download(filename, text, type) {
   URL.revokeObjectURL(url);
 }
 
+function escapeCsvCell(value) {
+  const text = String(value);
+  // Quoting alone does not prevent spreadsheet formula interpretation.
+  const unsafe = /^[\t\r\n]/.test(text) || /^\s*[=+\-@]/.test(text);
+  return '"' + (unsafe ? "'" + text : text).replaceAll('"', '""') + '"';
+}
+
 function toCsv(stats) {
   const rows = [["Hero", "Losses", "Appearances", "Weighted Losses", "MVP/SVP Appearances"]];
   for (const [hero, data] of rankThreats(stats)) {
     rows.push([hero, data.losses, data.appearances, data.weightedLosses, data.mvpSvpAppearances]);
   }
-  return rows.map((row) => row.map((value) => `"${String(value).replaceAll('"', '""')}"`).join(",")).join("\n");
+  return rows.map((row) => row.map(escapeCsvCell).join(",")).join("\n");
 }
 
 function escapeHtml(value) {
