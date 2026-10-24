@@ -83,3 +83,23 @@ test("popup.js: hero labels are escaped in threat list", () => {
   assert.equal(items.length, 1);
   assert.ok(items[0].innerHTML.includes("&lt;img src=x&gt;"));
 });
+
+test("content.js: prototype-colliding hero labels become safe own stats keys", () => {
+  const context = loadScript("content.js");
+  context.stats = {};
+  context.entries = [
+    { hero: "__proto__", weight: 1.2, hasAward: true },
+    { hero: "constructor", weight: 1, hasAward: false },
+    { hero: "toString", weight: 1, hasAward: false }
+  ];
+  const updated = vm.runInContext("updateStats(stats, entries)", context);
+  const saved = JSON.parse(JSON.stringify(updated));
+  for (const hero of ["__proto__", "constructor", "toString"]) {
+    assert.equal(Object.hasOwn(updated, hero), true);
+    assert.equal(saved[hero].losses, 1);
+    assert.equal(saved[hero].appearances, 1);
+  }
+  assert.equal(saved["__proto__"].weightedLosses, 1.2);
+  assert.equal(saved["__proto__"].mvpSvpAppearances, 1);
+  assert.deepEqual(context.stats, {});
+});
