@@ -83,13 +83,20 @@ function updateStats(currentStats, heroEntries) {
   const nextStats = structuredClone(currentStats || {});
 
   for (const { hero, weight, hasAward } of heroEntries) {
-    if (!nextStats[hero]) {
-      nextStats[hero] = {
-        losses: 0,
-        appearances: 0,
-        weightedLosses: 0,
-        mvpSvpAppearances: 0
-      };
+    if (!Object.hasOwn(nextStats, hero)) {
+      // Hero labels come from page markup. Define an own property so names like
+      // "__proto__" or "constructor" cannot resolve through Object.prototype.
+      Object.defineProperty(nextStats, hero, {
+        value: {
+          losses: 0,
+          appearances: 0,
+          weightedLosses: 0,
+          mvpSvpAppearances: 0
+        },
+        enumerable: true,
+        writable: true,
+        configurable: true
+      });
     }
 
     nextStats[hero].losses += 1;
