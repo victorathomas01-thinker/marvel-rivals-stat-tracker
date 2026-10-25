@@ -43,11 +43,16 @@ function getTeamScore(teamName) {
 }
 
 function getPlayerTeam(playerName, teamATable, teamBTable) {
-  const normalized = playerName.trim().toLowerCase();
+  const normalized = playerName.trim();
   if (!normalized) return null;
 
+  // A substring match can mistake "Space" for player "Ace" and
+  // attribute the opponent's heroes to the wrong team.
+  // Escape punctuation in player names and require name boundaries.
+  const escaped = normalized.replace(/[.*+?^$()|[\]{}\\]/g, "\\$&");
+  const exactName = new RegExp("(^|[^\\p{L}\\p{N}_])" + escaped + "(?=$|[^\\p{L}\\p{N}_])", "iu");
   const tableHasPlayer = (table) => [...table.querySelectorAll("tbody tr")].some((row) =>
-    row.textContent.toLowerCase().includes(normalized)
+    exactName.test(row.textContent || "")
   );
 
   if (tableHasPlayer(teamATable)) return "Team A";
