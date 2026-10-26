@@ -75,12 +75,22 @@ function renderStats(stats, processedMatches) {
 }
 
 chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
-  const stats = stored[STORAGE_KEYS.stats] || {};
-  const processedMatches = stored[STORAGE_KEYS.processedMatches] || [];
+  let stats = stored[STORAGE_KEYS.stats] || {};
+  let processedMatches = stored[STORAGE_KEYS.processedMatches] || [];
   const playerName = stored[STORAGE_KEYS.playerName] || DEFAULT_PLAYER_NAME;
 
   document.getElementById("playerName").value = playerName;
   renderStats(stats, processedMatches);
+
+  // Other match tabs can update storage while this popup is open.
+  chrome.storage.onChanged?.addListener((changes, areaName) => {
+    if (areaName !== "local") return;
+    if (!Object.hasOwn(changes, STORAGE_KEYS.stats) &&
+        !Object.hasOwn(changes, STORAGE_KEYS.processedMatches)) return;
+    if (Object.hasOwn(changes, STORAGE_KEYS.stats)) stats = changes[STORAGE_KEYS.stats].newValue || {};
+    if (Object.hasOwn(changes, STORAGE_KEYS.processedMatches)) processedMatches = changes[STORAGE_KEYS.processedMatches].newValue || [];
+    renderStats(stats, processedMatches);
+  });
 
   document.getElementById("savePlayer").addEventListener("click", () => {
     const value = document.getElementById("playerName").value.trim();
@@ -91,17 +101,23 @@ chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
   });
 
   document.getElementById("exportJson").addEventListener("click", () => {
-    download("marvel-rivals-threats.json", JSON.stringify(stats, null, 2), "application/json");
+    chrome.storage.local.get([STORAGE_KEYS.stats], (latest) => {
+      download("marvel-rivals-threats.json", JSON.stringify(latest[STORAGE_KEYS.stats] || {}, null, 2), "application/json");
+    });
   });
 
   document.getElementById("exportCsv").addEventListener("click", () => {
-    download("marvel-rivals-threats.csv", toCsv(stats), "text/csv");
+    chrome.storage.local.get([STORAGE_KEYS.stats], (latest) => {
+      download("marvel-rivals-threats.csv", toCsv(latest[STORAGE_KEYS.stats] || {}), "text/csv");
+    });
   });
 
   document.getElementById("clearData").addEventListener("click", () => {
     if (!confirm("Clear all tracked match data?")) return;
     chrome.storage.local.remove([STORAGE_KEYS.stats, STORAGE_KEYS.processedMatches], () => {
-      renderStats({}, []);
+      stats = {};
+      processedMatches = [];
+      renderStats(stats, processedMatches);
     });
   });
 });
