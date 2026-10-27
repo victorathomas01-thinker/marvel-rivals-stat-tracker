@@ -6,7 +6,6 @@ const STORAGE_KEYS = {
 
 const DEFAULT_PLAYER_NAME = "MrKilometer";
 const MVP_WEIGHT = 1.2;
-const MAX_PROCESSED_MATCHES = 500;
 
 function storageGet(keys) {
   return new Promise((resolve) => chrome.storage.local.get(keys, resolve));
@@ -194,13 +193,9 @@ async function processMatch() {
   }
 
   const matchId = getMatchId();
-  const processedMatches = stored[STORAGE_KEYS.processedMatches] || [];
   const currentStats = stored[STORAGE_KEYS.stats] || {};
-
-  if (processedMatches.includes(matchId)) {
-    renderOverlay(currentStats, "This match was already processed.");
-    return true;
-  }
+  // The background worker is the authority for duplicate detection.
+  // A snapshot taken here may be stale after another tab or Clear Data runs.
 
   const playerScore = playerTeam === "Team A" ? scoreA : scoreB;
   const opponentScore = playerTeam === "Team A" ? scoreB : scoreA;
