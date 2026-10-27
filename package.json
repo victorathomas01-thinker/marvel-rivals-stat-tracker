@@ -4,7 +4,7 @@
   "private": true,
   "description": "Chrome extension for tracking enemy hero threats in Marvel Rivals",
   "scripts": {
-    "check": "node --check content.js && node --check popup.js",
+    "check": "node --check content.js && node --check popup.js && node --check background.js",
     "test": "node --test tests/*.test.cjs",
     "verify": "npm run check && npm test"
   },
