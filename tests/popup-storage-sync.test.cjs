@@ -31,6 +31,13 @@ function loadPopup(initialStats = {}) {
       remove(keys, callback) { for (const key of keys) delete values[key]; callback?.(); }
     },
     onChanged: { addListener(listener) { listeners.push(listener); } }
+  }, runtime: {
+    lastError: null,
+    sendMessage(message, callback) {
+      assert.equal(message.type, "heroTracker/clearData");
+      for (const key of ["heroTrackerStats", "heroTrackerProcessedMatches"]) delete values[key];
+      callback({ ok: true, status: "cleared" });
+    }
   }};
   const context = {
     chrome, confirm: () => true,
