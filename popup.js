@@ -114,7 +114,11 @@ chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
 
   document.getElementById("clearData").addEventListener("click", () => {
     if (!confirm("Clear all tracked match data?")) return;
-    chrome.storage.local.remove([STORAGE_KEYS.stats, STORAGE_KEYS.processedMatches], () => {
+    chrome.runtime.sendMessage({ type: "heroTracker/clearData" }, (response) => {
+      if (chrome.runtime.lastError || !response?.ok) {
+        document.getElementById("saveStatus").textContent = "Unable to clear data. Please retry.";
+        return;
+      }
       stats = {};
       processedMatches = [];
       renderStats(stats, processedMatches);

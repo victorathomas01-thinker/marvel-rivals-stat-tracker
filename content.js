@@ -6,14 +6,22 @@ const STORAGE_KEYS = {
 
 const DEFAULT_PLAYER_NAME = "MrKilometer";
 const MVP_WEIGHT = 1.2;
-const MAX_PROCESSED_MATCHES = 500;
 
 function storageGet(keys) {
   return new Promise((resolve) => chrome.storage.local.get(keys, resolve));
 }
 
-function storageSet(values) {
-  return new Promise((resolve) => chrome.storage.local.set(values, resolve));
+function sendTrackerMessage(message) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage(message, (response) => {
+      const error = chrome.runtime.lastError;
+      if (error || !response?.ok) {
+        reject(new Error(error?.message || response?.error || "Tracker storage request failed."));
+      } else {
+        resolve(response);
+      }
+    });
+  });
 }
 
 function getMatchId() {
@@ -185,22 +193,22 @@ async function processMatch() {
   }
 
   const matchId = getMatchId();
-  const processedMatches = stored[STORAGE_KEYS.processedMatches] || [];
   const currentStats = stored[STORAGE_KEYS.stats] || {};
-
-  if (processedMatches.includes(matchId)) {
-    renderOverlay(currentStats, "This match was already processed.");
-    return true;
-  }
+  // The background worker is the authority for duplicate detection.
+  // A snapshot taken here may be stale after another tab or Clear Data runs.
 
   const playerScore = playerTeam === "Team A" ? scoreA : scoreB;
   const opponentScore = playerTeam === "Team A" ? scoreB : scoreA;
 
   if (playerScore >= opponentScore) {
-    await storageSet({
-      [STORAGE_KEYS.processedMatches]: [...processedMatches, matchId].slice(-MAX_PROCESSED_MATCHES)
+    const result = await sendTrackerMessage({
+      type: "heroTracker/recordMatch",
+      matchId,
+      outcome: playerScore === opponentScore ? "draw" : "win"
     });
-    renderOverlay(currentStats, playerScore === opponentScore ? "Draw detected — no loss data added." : "Win detected — no loss data added.");
+    renderOverlay(result.stats, result.status === "duplicate"
+      ? "This match was already processed."
+      : playerScore === opponentScore ? "Draw detected — no loss data added." : "Win detected — no loss data added.");
     return true;
   }
 
@@ -212,15 +220,15 @@ async function processMatch() {
     return true;
   }
 
-  const nextStats = updateStats(currentStats, heroEntries);
-  const nextProcessed = [...processedMatches, matchId].slice(-MAX_PROCESSED_MATCHES);
-
-  await storageSet({
-    [STORAGE_KEYS.stats]: nextStats,
-    [STORAGE_KEYS.processedMatches]: nextProcessed
+  const result = await sendTrackerMessage({
+    type: "heroTracker/recordMatch",
+    matchId,
+    outcome: "loss",
+    heroEntries
   });
-
-  renderOverlay(nextStats, `Loss recorded. Added ${heroEntries.length} opponent hero appearance${heroEntries.length === 1 ? "" : "s"}.`);
+  renderOverlay(result.stats, result.status === "duplicate"
+    ? "This match was already processed."
+    : `Loss recorded. Added ${heroEntries.length} opponent hero appearance${heroEntries.length === 1 ? "" : "s"}.`);
   return true;
 }
 
