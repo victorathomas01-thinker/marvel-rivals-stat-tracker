@@ -61,6 +61,19 @@ function addHeroEntries(currentStats, entries) {
   return next;
 }
 
+function validateStoredData(stats, processed) {
+  const validRecord = (record) => record !== null && typeof record === "object" && !Array.isArray(record) &&
+    ["losses", "appearances", "mvpSvpAppearances"].every((key) =>
+      Number.isSafeInteger(record[key]) && record[key] >= 0) &&
+    Number.isFinite(record.weightedLosses) && record.weightedLosses >= 0;
+  if (!stats || typeof stats !== "object" || Array.isArray(stats) ||
+      !Object.values(stats).every(validRecord) ||
+      !Array.isArray(processed) || !processed.every((id) => typeof id === "string" && id.length > 0)) {
+    // Never silently reset processed IDs or write NaN into existing hero totals.
+    throw new Error("Stored tracker data is invalid. Back up the data before clearing it.");
+  }
+}
+
 async function recordMatch(message) {
   const { matchId, outcome } = message;
   if (typeof matchId !== "string" || !matchId || matchId.length > 2048 ||
@@ -78,8 +91,9 @@ async function recordMatch(message) {
 
   // This read, duplicate check, and write are serialized with all other requests.
   const stored = await getStored([KEYS.stats, KEYS.processed]);
-  const processed = Array.isArray(stored[KEYS.processed]) ? stored[KEYS.processed] : [];
-  const stats = stored[KEYS.stats] || {};
+  const processed = stored[KEYS.processed] === undefined ? [] : stored[KEYS.processed];
+  const stats = stored[KEYS.stats] === undefined ? {} : stored[KEYS.stats];
+  validateStoredData(stats, processed);
   if (processed.includes(matchId)) return { status: "duplicate", stats };
 
   const updates = {
