@@ -92,3 +92,24 @@ test("clear data also clears popup state and subsequent exports", () => {
   assert.equal(popup.exports[1].content.split("\n").length, 1);
   assert.equal(popup.values.heroTrackerStats, undefined);
 });
+
+test("corrupt statistics show a recovery message without disabling JSON backup or Clear Data", () => {
+  const corrupt = { Storm: { losses: 2, appearances: 2, weightedLosses: "bad", mvpSvpAppearances: 0 } };
+  const popup = loadPopup(corrupt);
+  assert.match(popup.getElement("threatList").children.at(-1).textContent, /Export JSON before clearing/);
+  assert.equal(popup.getElement("matchCount").textContent, "Stored data needs repair");
+  popup.click("exportJson");
+  assert.deepEqual(JSON.parse(popup.exports[0].content), corrupt);
+  popup.click("exportCsv");
+  assert.equal(popup.exports.length, 1, "invalid data must not be exported as numeric CSV");
+  assert.match(popup.getElement("saveStatus").textContent, /Export JSON instead/);
+  popup.click("clearData");
+  assert.equal(popup.getElement("matchCount").textContent, "0 matches seen");
+  assert.equal(popup.values.heroTrackerStats, undefined);
+});
+
+test("null processed-match history displays a repair warning", () => {
+  const popup = loadPopup({ Storm: stat(1) });
+  popup.change({ heroTrackerProcessedMatches: null });
+  assert.equal(popup.getElement("matchCount").textContent, "Stored data needs repair");
+});
