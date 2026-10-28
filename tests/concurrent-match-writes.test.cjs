@@ -106,3 +106,42 @@ test("invalid requests do not poison the worker queue", async () => {
   assert.equal(accepted.ok, true);
   assert.deepEqual(worker.values.heroTrackerProcessedMatches, ["win"]);
 });
+
+test("invalid processed-match history cannot be silently reset by a new write", async () => {
+  const worker = loadWorker();
+  worker.values.heroTrackerProcessedMatches = { 0: "already-recorded" };
+  const original = structuredClone(worker.values);
+  const response = await worker.send(loss("new-match", "Storm"));
+  assert.equal(response.ok, false);
+  assert.match(response.error, /Stored tracker data is invalid/);
+  assert.deepEqual(worker.values, original);
+});
+
+test("malformed hero totals cannot produce NaN or overwrite stored data", async () => {
+  const worker = loadWorker();
+  worker.values.heroTrackerStats.Storm = { losses: 2, appearances: 2, weightedLosses: "2", mvpSvpAppearances: 0 };
+  const original = structuredClone(worker.values);
+  const response = await worker.send(loss("new-match", "Storm"));
+  assert.equal(response.ok, false);
+  assert.deepEqual(worker.values, original);
+});
+
+test("after rejecting corrupt storage, Clear Data restores normal writes", async () => {
+  const worker = loadWorker();
+  worker.values.heroTrackerProcessedMatches = "bad history";
+  assert.equal((await worker.send(loss("first", "Storm"))).ok, false);
+  assert.equal((await worker.send({ type: "heroTracker/clearData" })).ok, true);
+  const accepted = await worker.send(loss("second", "Storm"));
+  assert.equal(accepted.status, "recorded");
+  assert.equal(worker.values.heroTrackerStats.Storm.weightedLosses, 1);
+  assert.deepEqual(worker.values.heroTrackerProcessedMatches, ["second"]);
+});
+
+test("null stored values are rejected rather than treated as missing", async () => {
+  const worker = loadWorker();
+  worker.values.heroTrackerProcessedMatches = null;
+  const response = await worker.send(loss("new-match", "Storm"));
+  assert.equal(response.ok, false);
+  assert.equal(worker.values.heroTrackerProcessedMatches, null);
+  assert.equal(Object.hasOwn(worker.values.heroTrackerStats, "Storm"), false);
+});
