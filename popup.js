@@ -49,11 +49,31 @@ function escapeHtml(value) {
   })[char]);
 }
 
+function isValidSnapshot(stats, processedMatches) {
+  return !!stats && typeof stats === "object" && !Array.isArray(stats) &&
+    Object.values(stats).every((record) => record !== null && typeof record === "object" &&
+      !Array.isArray(record) &&
+      ["losses", "appearances", "mvpSvpAppearances"].every((key) =>
+        Number.isSafeInteger(record[key]) && record[key] >= 0) &&
+      Number.isFinite(record.weightedLosses) && record.weightedLosses >= 0) &&
+    Array.isArray(processedMatches) &&
+    processedMatches.every((id) => typeof id === "string" && id.length > 0);
+}
+
 function renderStats(stats, processedMatches) {
   const list = document.getElementById("threatList");
-  const ranked = rankThreats(stats).slice(0, 5);
   list.innerHTML = "";
 
+  if (!isValidSnapshot(stats, processedMatches)) {
+    const warning = document.createElement("li");
+    warning.className = "empty";
+    warning.textContent = "Stored data needs repair. Export JSON before clearing data.";
+    list.appendChild(warning);
+    document.getElementById("matchCount").textContent = "Stored data needs repair";
+    return;
+  }
+
+  const ranked = rankThreats(stats).slice(0, 5);
   if (!ranked.length) {
     const empty = document.createElement("li");
     empty.className = "empty";
@@ -75,8 +95,8 @@ function renderStats(stats, processedMatches) {
 }
 
 chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
-  let stats = stored[STORAGE_KEYS.stats] || {};
-  let processedMatches = stored[STORAGE_KEYS.processedMatches] || [];
+  let stats = stored[STORAGE_KEYS.stats] === undefined ? {} : stored[STORAGE_KEYS.stats];
+  let processedMatches = stored[STORAGE_KEYS.processedMatches] === undefined ? [] : stored[STORAGE_KEYS.processedMatches];
   const playerName = stored[STORAGE_KEYS.playerName] || DEFAULT_PLAYER_NAME;
 
   document.getElementById("playerName").value = playerName;
@@ -87,8 +107,8 @@ chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
     if (areaName !== "local") return;
     if (!Object.hasOwn(changes, STORAGE_KEYS.stats) &&
         !Object.hasOwn(changes, STORAGE_KEYS.processedMatches)) return;
-    if (Object.hasOwn(changes, STORAGE_KEYS.stats)) stats = changes[STORAGE_KEYS.stats].newValue || {};
-    if (Object.hasOwn(changes, STORAGE_KEYS.processedMatches)) processedMatches = changes[STORAGE_KEYS.processedMatches].newValue || [];
+    if (Object.hasOwn(changes, STORAGE_KEYS.stats)) stats = changes[STORAGE_KEYS.stats].newValue === undefined ? {} : changes[STORAGE_KEYS.stats].newValue;
+    if (Object.hasOwn(changes, STORAGE_KEYS.processedMatches)) processedMatches = changes[STORAGE_KEYS.processedMatches].newValue === undefined ? [] : changes[STORAGE_KEYS.processedMatches].newValue;
     renderStats(stats, processedMatches);
   });
 
@@ -102,13 +122,18 @@ chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
 
   document.getElementById("exportJson").addEventListener("click", () => {
     chrome.storage.local.get([STORAGE_KEYS.stats], (latest) => {
-      download("marvel-rivals-threats.json", JSON.stringify(latest[STORAGE_KEYS.stats] || {}, null, 2), "application/json");
+      download("marvel-rivals-threats.json", JSON.stringify(latest[STORAGE_KEYS.stats] === undefined ? {} : latest[STORAGE_KEYS.stats], null, 2), "application/json");
     });
   });
 
   document.getElementById("exportCsv").addEventListener("click", () => {
     chrome.storage.local.get([STORAGE_KEYS.stats], (latest) => {
-      download("marvel-rivals-threats.csv", toCsv(latest[STORAGE_KEYS.stats] || {}), "text/csv");
+      const latestStats = latest[STORAGE_KEYS.stats] === undefined ? {} : latest[STORAGE_KEYS.stats];
+      if (!isValidSnapshot(latestStats, [])) {
+        document.getElementById("saveStatus").textContent = "Cannot export invalid statistics as CSV. Export JSON instead.";
+        return;
+      }
+      download("marvel-rivals-threats.csv", toCsv(latestStats), "text/csv");
     });
   });
 
