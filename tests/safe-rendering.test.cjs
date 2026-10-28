@@ -78,7 +78,7 @@ test("popup.js: hero labels are escaped in threat list", () => {
     getElementById(id) { return id === "threatList" ? list : { textContent: "" }; },
     createElement() { return {}; }
   };
-  context.stats = { "<img src=x>": { weightedLosses: 1, losses: 1, appearances: 1 } };
+  context.stats = { "<img src=x>": { weightedLosses: 1, losses: 1, appearances: 1, mvpSvpAppearances: 0 } };
   vm.runInContext("renderStats(stats, [])", context);
   assert.equal(items.length, 1);
   assert.ok(items[0].innerHTML.includes("&lt;img src=x&gt;"));
