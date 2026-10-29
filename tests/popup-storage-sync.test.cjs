@@ -48,7 +48,7 @@ function loadPopup(initialStats = {}) {
   const exports = [];
   context.download = (filename, content) => exports.push({ filename, content });
   return {
-    values, exports, getElement,
+    chrome, values, exports, getElement,
     click(id) { getElement(id).click(); },
     change(update, areaName = "local") {
       const changes = {};
@@ -112,4 +112,51 @@ test("null processed-match history displays a repair warning", () => {
   const popup = loadPopup({ Storm: stat(1) });
   popup.change({ heroTrackerProcessedMatches: null });
   assert.equal(popup.getElement("matchCount").textContent, "Stored data needs repair");
+});
+
+test("full backup captures fresh statistics, processed IDs, and player name without changing legacy JSON", () => {
+  const popup = loadPopup({ Luna: stat(1) });
+  popup.values.heroTrackerStats = { Storm: stat(3) };
+  popup.values.heroTrackerProcessedMatches = ["match-a", "match-b"];
+  popup.values.heroTrackerPlayerName = "NewPlayer";
+  popup.click("exportBackup");
+  assert.equal(popup.exports[0].filename, "marvel-rivals-full-backup.json");
+  const backup = JSON.parse(popup.exports[0].content);
+  assert.equal(backup.schemaVersion, 1);
+  assert.match(backup.exportedAt, /^\\d{4}-\\d{2}-\\d{2}T/);
+  assert.equal(backup.stats.Storm.losses, 3);
+  assert.equal(Object.hasOwn(backup.stats, "Luna"), false);
+  assert.deepEqual(backup.processedMatchIds, ["match-a", "match-b"]);
+  assert.equal(backup.playerName, "NewPlayer");
+  popup.click("exportJson");
+  assert.deepEqual(JSON.parse(popup.exports[1].content), { Storm: stat(3) });
+});
+
+test("full backup preserves malformed data for recovery rather than silently normalizing it", () => {
+  const corrupt = { Storm: { losses: "bad", weightedLosses: null } };
+  const popup = loadPopup(corrupt);
+  popup.values.heroTrackerProcessedMatches = null;
+  popup.click("exportBackup");
+  const backup = JSON.parse(popup.exports[0].content);
+  assert.deepEqual(backup.stats, corrupt);
+  assert.equal(backup.processedMatchIds, null);
+  assert.equal(popup.values.heroTrackerProcessedMatches, null);
+});
+
+test("full backup fails closed on a storage read error", () => {
+  const popup = loadPopup({ Storm: stat(1) });
+  popup.chrome.runtime.lastError = { message: "Storage unavailable" };
+  popup.click("exportBackup");
+  assert.equal(popup.exports.length, 0);
+  assert.match(popup.getElement("saveStatus").textContent, /Unable to read backup data/);
+});
+
+test("full backup after clearing includes empty records and retained player setting", () => {
+  const popup = loadPopup({ Storm: stat(1) });
+  popup.click("clearData");
+  popup.click("exportBackup");
+  const backup = JSON.parse(popup.exports[0].content);
+  assert.deepEqual(backup.stats, {});
+  assert.deepEqual(backup.processedMatchIds, []);
+  assert.equal(backup.playerName, "Tester");
 });
