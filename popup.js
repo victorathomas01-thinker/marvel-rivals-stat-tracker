@@ -126,6 +126,25 @@ chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
     });
   });
 
+  // Keep the legacy statistics-only JSON export unchanged for existing users.
+  // A full backup captures the other keys needed to identify processed matches.
+  document.getElementById("exportBackup").addEventListener("click", () => {
+    chrome.storage.local.get(Object.values(STORAGE_KEYS), (latest) => {
+      if (chrome.runtime.lastError) {
+        document.getElementById("saveStatus").textContent = "Unable to read backup data. Please retry.";
+        return;
+      }
+      const backup = {
+        schemaVersion: 1,
+        exportedAt: new Date().toISOString(),
+        stats: latest[STORAGE_KEYS.stats] === undefined ? {} : latest[STORAGE_KEYS.stats],
+        processedMatchIds: latest[STORAGE_KEYS.processedMatches] === undefined ? [] : latest[STORAGE_KEYS.processedMatches],
+        playerName: latest[STORAGE_KEYS.playerName] === undefined ? DEFAULT_PLAYER_NAME : latest[STORAGE_KEYS.playerName]
+      };
+      download("marvel-rivals-full-backup.json", JSON.stringify(backup, null, 2), "application/json");
+    });
+  });
+
   document.getElementById("exportCsv").addEventListener("click", () => {
     chrome.storage.local.get([STORAGE_KEYS.stats], (latest) => {
       const latestStats = latest[STORAGE_KEYS.stats] === undefined ? {} : latest[STORAGE_KEYS.stats];
