@@ -123,7 +123,7 @@ test("full backup captures fresh statistics, processed IDs, and player name with
   assert.equal(popup.exports[0].filename, "marvel-rivals-full-backup.json");
   const backup = JSON.parse(popup.exports[0].content);
   assert.equal(backup.schemaVersion, 1);
-  assert.match(backup.exportedAt, /^\\d{4}-\\d{2}-\\d{2}T/);
+  assert.match(backup.exportedAt, /^\d{4}-\d{2}-\d{2}T/);
   assert.equal(backup.stats.Storm.losses, 3);
   assert.equal(Object.hasOwn(backup.stats, "Luna"), false);
   assert.deepEqual(backup.processedMatchIds, ["match-a", "match-b"]);
