@@ -60,6 +60,30 @@ function isValidSnapshot(stats, processedMatches) {
     processedMatches.every((id) => typeof id === "string" && id.length > 0);
 }
 
+// Preflight is deliberately read-only. Restoring must use the serialized worker
+// rather than writing chrome.storage.local directly from this popup.
+function checkBackupDocument(backup) {
+  if (!backup || typeof backup !== "object" || Array.isArray(backup)) {
+    throw new Error("Expected a full-backup JSON object.");
+  }
+  if (backup.schemaVersion !== 1) {
+    throw new Error("Unsupported backup version.");
+  }
+  if (typeof backup.exportedAt !== "string" || !Number.isFinite(Date.parse(backup.exportedAt))) {
+    throw new Error("Missing or invalid backup timestamp.");
+  }
+  if (typeof backup.playerName !== "string" || !backup.playerName.trim() || backup.playerName.length > 2048) {
+    throw new Error("Invalid saved player name.");
+  }
+  if (!isValidSnapshot(backup.stats, backup.processedMatchIds) ||
+      backup.processedMatchIds.length > 500 ||
+      backup.processedMatchIds.some((id) => id.length > 2048) ||
+      new Set(backup.processedMatchIds).size !== backup.processedMatchIds.length) {
+    throw new Error("Backup contains malformed tracking data; preserve it for troubleshooting.");
+  }
+  return `Backup checked: ${backup.processedMatchIds.length} matches and ${Object.keys(backup.stats).length} heroes. Nothing imported.`;
+}
+
 function renderStats(stats, processedMatches) {
   const list = document.getElementById("threatList");
   list.innerHTML = "";
@@ -143,6 +167,31 @@ chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
       };
       download("marvel-rivals-full-backup.json", JSON.stringify(backup, null, 2), "application/json");
     });
+  });
+
+  document.getElementById("backupFile").addEventListener("change", async () => {
+    const input = document.getElementById("backupFile");
+    const status = document.getElementById("backupStatus");
+    const file = input.files?.[0];
+    if (!file) {
+      status.textContent = "";
+      return;
+    }
+    if (file.size > 2 * 1024 * 1024) {
+      status.textContent = "Backup check failed: File exceeds the 2 MB inspection limit.";
+      return;
+    }
+    try {
+      const text = await file.text();
+      // Ignore a slower previous selection if the user has chosen another file.
+      if (input.files?.[0] !== file) return;
+      status.textContent = checkBackupDocument(JSON.parse(text));
+    } catch (error) {
+      if (input.files?.[0] !== file) return;
+      status.textContent = error instanceof SyntaxError
+        ? "Backup check failed: Invalid JSON."
+        : `Backup check failed: ${error.message}`;
+    }
   });
 
   document.getElementById("exportCsv").addEventListener("click", () => {
