@@ -160,3 +160,65 @@ test("full backup after clearing includes empty records and retained player sett
   assert.deepEqual(backup.processedMatchIds, []);
   assert.equal(backup.playerName, "Tester");
 });
+
+function validFullBackup(overrides = {}) {
+  return {
+    schemaVersion: 1,
+    exportedAt: "2026-10-30T12:00:00.000Z",
+    stats: { Storm: stat(2) },
+    processedMatchIds: ["match-a", "match-b"],
+    playerName: "Tester",
+    ...overrides
+  };
+}
+
+async function inspectBackup(popup, content, size = 100) {
+  const input = popup.getElement("backupFile");
+  input.files = [{ size, text: async () => content }];
+  await input.change();
+  return popup.getElement("backupStatus").textContent;
+}
+
+test("backup preflight accepts versioned full-state JSON without modifying storage", async () => {
+  const popup = loadPopup({ Luna: stat(1) });
+  const original = structuredClone(popup.values);
+  const result = await inspectBackup(popup, JSON.stringify(validFullBackup()));
+  assert.match(result, /2 matches and 1 heroes/);
+  assert.match(result, /Nothing imported/);
+  assert.deepEqual(popup.values, original);
+  assert.equal(popup.exports.length, 0);
+});
+
+test("backup preflight rejects unsupported versions and malformed data without writes", async () => {
+  const popup = loadPopup({ Luna: stat(1) });
+  const original = structuredClone(popup.values);
+  assert.match(await inspectBackup(popup, JSON.stringify(validFullBackup({ schemaVersion: 2 }))), /Unsupported backup version/);
+  assert.match(await inspectBackup(popup, JSON.stringify(validFullBackup({
+    stats: { Storm: { losses: "broken" } }
+  }))), /malformed tracking data/);
+  assert.match(await inspectBackup(popup, JSON.stringify(validFullBackup({
+    processedMatchIds: ["duplicate", "duplicate"]
+  }))), /malformed tracking data/);
+  assert.deepEqual(popup.values, original);
+});
+
+test("backup preflight rejects invalid JSON and oversized files", async () => {
+  const popup = loadPopup();
+  assert.match(await inspectBackup(popup, "{bad json"), /Invalid JSON/);
+  assert.match(await inspectBackup(popup, JSON.stringify(validFullBackup()), 2 * 1024 * 1024 + 1), /2 MB inspection limit/);
+  assert.equal(popup.exports.length, 0);
+});
+
+test("backup preflight ignores stale asynchronous file reads", async () => {
+  const popup = loadPopup();
+  const input = popup.getElement("backupFile");
+  let finishFirst;
+  const slowFile = { size: 100, text: () => new Promise(resolve => { finishFirst = resolve; }) };
+  input.files = [slowFile];
+  const pending = input.change();
+  input.files = [{ size: 100, text: async () => JSON.stringify(validFullBackup()) }];
+  await input.change();
+  finishFirst("{bad json");
+  await pending;
+  assert.match(popup.getElement("backupStatus").textContent, /Nothing imported/);
+});
