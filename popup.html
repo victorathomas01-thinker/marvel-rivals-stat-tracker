@@ -31,6 +31,14 @@
       <button id="exportBackup" type="button">Export full backup (JSON)</button>
       <button id="clearData" class="danger" type="button">Clear Data</button>
     </div>
+
+    <section>
+      <h2>Check a full backup</h2>
+      <p>Inspect a saved JSON backup before recovery. This does not import or change data.</p>
+      <label for="backupFile">Select full-backup JSON file</label>
+      <input id="backupFile" type="file" accept=".json,application/json">
+      <p id="backupStatus" class="status" role="status" aria-live="polite"></p>
+    </section>
   </main>
   <script src="popup.js"></script>
 </body>
