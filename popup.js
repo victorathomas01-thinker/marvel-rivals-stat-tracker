@@ -139,8 +139,9 @@ chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
   document.getElementById("savePlayer").addEventListener("click", () => {
     const value = document.getElementById("playerName").value.trim();
     if (!value) return;
-    chrome.storage.local.set({ [STORAGE_KEYS.playerName]: value }, () => {
-      document.getElementById("saveStatus").textContent = "Player name saved.";
+    chrome.runtime.sendMessage({ type: "heroTracker/setPlayerName", playerName: value }, (response) => {
+      document.getElementById("saveStatus").textContent =
+        chrome.runtime.lastError || !response?.ok ? "Unable to save player name. Please retry." : "Player name saved.";
     });
   });
 
@@ -169,10 +170,15 @@ chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
     });
   });
 
+  let validatedBackup = null;
+  const restoreButton = document.getElementById("restoreBackup");
+  restoreButton.disabled = true;
   document.getElementById("backupFile").addEventListener("change", async () => {
     const input = document.getElementById("backupFile");
     const status = document.getElementById("backupStatus");
     const file = input.files?.[0];
+    validatedBackup = null;
+    restoreButton.disabled = true;
     if (!file) {
       status.textContent = "";
       return;
@@ -185,13 +191,38 @@ chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
       const text = await file.text();
       // Ignore a slower previous selection if the user has chosen another file.
       if (input.files?.[0] !== file) return;
-      status.textContent = checkBackupDocument(JSON.parse(text));
+      const backup = JSON.parse(text);
+      status.textContent = checkBackupDocument(backup);
+      validatedBackup = backup;
+      restoreButton.disabled = false;
     } catch (error) {
       if (input.files?.[0] !== file) return;
+      validatedBackup = null;
+      restoreButton.disabled = true;
       status.textContent = error instanceof SyntaxError
         ? "Backup check failed: Invalid JSON."
         : `Backup check failed: ${error.message}`;
     }
+  });
+
+  restoreButton.addEventListener("click", () => {
+    if (!validatedBackup || restoreButton.disabled) return;
+    if (!confirm("Replace all tracked matches, hero totals, and player name with this backup?")) return;
+    const backup = validatedBackup;
+    restoreButton.disabled = true;
+    chrome.runtime.sendMessage({ type: "heroTracker/restoreBackup", backup }, (response) => {
+      if (chrome.runtime.lastError || !response?.ok) {
+        document.getElementById("backupStatus").textContent =
+          "Restore failed: " + (response?.error || "Unable to reach the extension worker.");
+        // Require a new file check before retrying a potentially partial write.
+        validatedBackup = null;
+        return;
+      }
+      validatedBackup = null;
+      document.getElementById("backupStatus").textContent =
+        `Restored ${response.matches} matches and ${response.heroes} heroes. Previous tracker data was replaced.`;
+      document.getElementById("playerName").value = backup.playerName;
+    });
   });
 
   document.getElementById("exportCsv").addEventListener("click", () => {
