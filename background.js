@@ -2,7 +2,8 @@
 // Chrome storage has no atomic read-modify-write primitive across content-script tabs.
 const KEYS = {
   stats: "heroTrackerStats",
-  processed: "heroTrackerProcessedMatches"
+  processed: "heroTrackerProcessedMatches",
+  playerName: "heroTrackerPlayerName"
 };
 const MAX_PROCESSED_MATCHES = 500;
 let pending = Promise.resolve();
@@ -74,6 +75,60 @@ function validateStoredData(stats, processed) {
   }
 }
 
+// Validate in the worker too: popup preflight is advisory, never a trust boundary.
+function validateBackup(backup) {
+  if (!backup || typeof backup !== "object" || Array.isArray(backup) ||
+      backup.schemaVersion !== 1 ||
+      typeof backup.exportedAt !== "string" || !Number.isFinite(Date.parse(backup.exportedAt)) ||
+      typeof backup.playerName !== "string" || !backup.playerName.trim() ||
+      backup.playerName.length > 2048 ||
+      !Array.isArray(backup.processedMatchIds) || backup.processedMatchIds.length > MAX_PROCESSED_MATCHES ||
+      backup.processedMatchIds.some(id => typeof id !== "string" || !id || id.length > 2048) ||
+      new Set(backup.processedMatchIds).size !== backup.processedMatchIds.length) {
+    throw new Error("Invalid full backup; no data was restored.");
+  }
+  validateStoredData(backup.stats, backup.processedMatchIds);
+  if (Object.keys(backup.stats).length > 1000 ||
+      Object.entries(backup.stats).some(([hero]) => !hero.trim() || hero.length > 200)) {
+    throw new Error("Invalid hero names in full backup; no data was restored.");
+  }
+}
+
+// This operation shares the match/clear queue. A failed storage write triggers
+// best-effort rollback of both existing values and previously absent keys.
+async function restoreBackup(backup) {
+  validateBackup(backup);
+  const keys = [KEYS.stats, KEYS.processed, KEYS.playerName];
+  const before = await getStored(keys);
+  const replacement = {
+    [KEYS.stats]: backup.stats,
+    [KEYS.processed]: backup.processedMatchIds,
+    [KEYS.playerName]: backup.playerName
+  };
+  try {
+    await setStored(replacement);
+  } catch (error) {
+    const existing = Object.fromEntries(Object.entries(before).filter(([, value]) => value !== undefined));
+    const absent = keys.filter(key => before[key] === undefined);
+    try {
+      if (Object.keys(existing).length) await setStored(existing);
+      if (absent.length) await removeStored(absent);
+    } catch (rollbackError) {
+      throw new Error("Restore failed and rollback also failed. Export a full backup before further changes.");
+    }
+    throw new Error("Restore failed; previous data was restored. " + error.message);
+  }
+  return { status: "restored", matches: backup.processedMatchIds.length, heroes: Object.keys(backup.stats).length };
+}
+
+async function savePlayerName(value) {
+  if (typeof value !== "string" || !value.trim() || value.length > 2048) {
+    throw new Error("Invalid player name.");
+  }
+  await setStored({ [KEYS.playerName]: value.trim() });
+  return { status: "saved" };
+}
+
 async function recordMatch(message) {
   const { matchId, outcome } = message;
   if (typeof matchId !== "string" || !matchId || matchId.length > 2048 ||
@@ -105,13 +160,19 @@ async function recordMatch(message) {
 }
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message?.type !== "heroTracker/recordMatch" && message?.type !== "heroTracker/clearData") {
+  const type = message?.type;
+  if (!["heroTracker/recordMatch", "heroTracker/clearData", "heroTracker/restoreBackup",
+         "heroTracker/setPlayerName"].includes(type)) {
     return false;
   }
-  serialize(() => message.type === "heroTracker/clearData"
-    ? removeStored([KEYS.stats, KEYS.processed]).then(() => ({ status: "cleared" }))
-    : recordMatch(message)
-  ).then(
+  serialize(() => {
+    if (type === "heroTracker/clearData") {
+      return removeStored([KEYS.stats, KEYS.processed]).then(() => ({ status: "cleared" }));
+    }
+    if (type === "heroTracker/restoreBackup") return restoreBackup(message.backup);
+    if (type === "heroTracker/setPlayerName") return savePlayerName(message.playerName);
+    return recordMatch(message);
+  }).then(
     (result) => sendResponse({ ok: true, ...result }),
     (error) => sendResponse({ ok: false, error: error.message })
   );
