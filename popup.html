@@ -34,9 +34,10 @@
 
     <section>
       <h2>Check a full backup</h2>
-      <p>Inspect a saved JSON backup before recovery. This does not import or change data.</p>
+      <p>Inspect a saved JSON backup before restoring. The check does not change data; Restore replaces existing tracker data.</p>
       <label for="backupFile">Select full-backup JSON file</label>
       <input id="backupFile" type="file" accept=".json,application/json">
+      <button id="restoreBackup" type="button" disabled>Restore checked backup</button>
       <p id="backupStatus" class="status" role="status" aria-live="polite"></p>
     </section>
   </main>
