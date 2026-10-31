@@ -34,9 +34,19 @@ function loadPopup(initialStats = {}) {
   }, runtime: {
     lastError: null,
     sendMessage(message, callback) {
-      assert.equal(message.type, "heroTracker/clearData");
-      for (const key of ["heroTrackerStats", "heroTrackerProcessedMatches"]) delete values[key];
-      callback({ ok: true, status: "cleared" });
+      if (message.type === "heroTracker/clearData") {
+        for (const key of ["heroTrackerStats", "heroTrackerProcessedMatches"]) delete values[key];
+        callback({ ok: true, status: "cleared" });
+      } else if (message.type === "heroTracker/setPlayerName") {
+        values.heroTrackerPlayerName = message.playerName;
+        callback({ ok: true, status: "saved" });
+      } else if (message.type === "heroTracker/restoreBackup") {
+        values.heroTrackerStats = structuredClone(message.backup.stats);
+        values.heroTrackerProcessedMatches = structuredClone(message.backup.processedMatchIds);
+        values.heroTrackerPlayerName = message.backup.playerName;
+        callback({ ok: true, status: "restored", matches: message.backup.processedMatchIds.length,
+          heroes: Object.keys(message.backup.stats).length });
+      } else assert.fail("Unexpected worker request: " + message.type);
     }
   }};
   const context = {
@@ -221,4 +231,49 @@ test("backup preflight ignores stale asynchronous file reads", async () => {
   finishFirst("{bad json");
   await pending;
   assert.match(popup.getElement("backupStatus").textContent, /Nothing imported/);
+});
+
+test("restore stays disabled until a full backup passes preflight", async () => {
+  const popup = loadPopup({ Luna: stat(1) });
+  const button = popup.getElement("restoreBackup");
+  const before = structuredClone(popup.values);
+  assert.equal(button.disabled, true);
+  popup.click("restoreBackup");
+  assert.deepEqual(popup.values, before);
+  await inspectBackup(popup, "{bad json");
+  assert.equal(button.disabled, true);
+  popup.click("restoreBackup");
+  assert.deepEqual(popup.values, before);
+});
+
+test("checked restore replaces state only after explicit user action", async () => {
+  const popup = loadPopup({ Luna: stat(1) });
+  await inspectBackup(popup, JSON.stringify(validFullBackup()));
+  assert.equal(popup.getElement("restoreBackup").disabled, false);
+  assert.equal(popup.values.heroTrackerStats.Luna.losses, 1, "preflight is read-only");
+  popup.click("restoreBackup");
+  assert.equal(popup.getElement("restoreBackup").disabled, true);
+  assert.equal(popup.values.heroTrackerStats.Storm.losses, 2);
+  assert.deepEqual(popup.values.heroTrackerProcessedMatches, ["match-a", "match-b"]);
+  assert.equal(popup.values.heroTrackerPlayerName, "Tester");
+  assert.match(popup.getElement("backupStatus").textContent, /Restored 2 matches/);
+});
+
+test("choosing an invalid file after a valid file revokes restore permission", async () => {
+  const popup = loadPopup({ Luna: stat(1) });
+  const original = structuredClone(popup.values);
+  await inspectBackup(popup, JSON.stringify(validFullBackup()));
+  assert.equal(popup.getElement("restoreBackup").disabled, false);
+  await inspectBackup(popup, JSON.stringify(validFullBackup({ schemaVersion: 99 })));
+  assert.equal(popup.getElement("restoreBackup").disabled, true);
+  popup.click("restoreBackup");
+  assert.deepEqual(popup.values, original);
+});
+
+test("player name save routes through the worker", () => {
+  const popup = loadPopup();
+  popup.getElement("playerName").value = "UpdatedName";
+  popup.click("savePlayer");
+  assert.equal(popup.values.heroTrackerPlayerName, "UpdatedName");
+  assert.match(popup.getElement("saveStatus").textContent, /saved/);
 });
