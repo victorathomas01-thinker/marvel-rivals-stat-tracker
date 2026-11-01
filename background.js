@@ -159,10 +159,22 @@ async function recordMatch(message) {
   return { status: "recorded", stats: updates[KEYS.stats] || stats };
 }
 
+// Chrome supplies MessageSender metadata; only the popup may request destructive
+// or settings operations. A content script can still submit match results.
+function isPopupSender(sender) {
+  return sender?.id === chrome.runtime.id &&
+    !sender.tab &&
+    sender.url === chrome.runtime.getURL("popup.html");
+}
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   const type = message?.type;
   if (!["heroTracker/recordMatch", "heroTracker/clearData", "heroTracker/restoreBackup",
          "heroTracker/setPlayerName"].includes(type)) {
+    return false;
+  }
+  if (type !== "heroTracker/recordMatch" && !isPopupSender(sender)) {
+    sendResponse({ ok: false, error: "This action is only available from the extension popup." });
     return false;
   }
   serialize(() => {
