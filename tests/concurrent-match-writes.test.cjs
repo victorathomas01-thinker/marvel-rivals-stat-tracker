@@ -10,6 +10,8 @@ function loadWorker({ pauseWrites = false } = {}) {
   let listener;
   const chrome = {
     runtime: {
+      id: "extension",
+      getURL: path => "chrome-extension://extension/" + path,
       lastError: null,
       onMessage: { addListener(callback) { listener = callback; } }
     },
@@ -37,7 +39,10 @@ function loadWorker({ pauseWrites = false } = {}) {
     values, writes,
     send(message) {
       return new Promise((resolve) => {
-        assert.equal(listener(message, { id: "extension" }, resolve), true);
+        assert.equal(listener(message, {
+          id: "extension",
+          url: "chrome-extension://extension/popup.html"
+        }, resolve), true);
       });
     }
   };

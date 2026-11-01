@@ -14,7 +14,12 @@ function workerFixture({ pauseWrites = false, empty = false } = {}) {
   let failNextSet = false;
   let listener;
   const chrome = {
-    runtime: { lastError: null, onMessage: { addListener(fn) { listener = fn; } } },
+    runtime: {
+      id: "extension",
+      getURL: path => "chrome-extension://extension/" + path,
+      lastError: null,
+      onMessage: { addListener(fn) { listener = fn; } }
+    },
     storage: { local: {
       get(keys, callback) { callback(Object.fromEntries(keys.map(key => [key, values[key]]))); },
       set(update, callback) {
@@ -36,7 +41,9 @@ function workerFixture({ pauseWrites = false, empty = false } = {}) {
   return {
     values, queuedWrites,
     failOnce() { failNextSet = true; },
-    send(message) { return new Promise(resolve => assert.equal(listener(message, { id: "extension" }, resolve), true)); }
+    send(message, sender = { id: "extension", url: "chrome-extension://extension/popup.html" }) {
+      return new Promise(resolve => listener(message, sender, resolve));
+    }
   };
 }
 
@@ -119,4 +126,38 @@ test("player setting changes use the same queue as restore", async () => {
   assert.equal(restored.ok, true);
   assert.equal(saved.ok, true);
   assert.equal(w.values.heroTrackerPlayerName, "NewName");
+});
+
+const contentSender = { id: "extension", tab: { id: 42 }, url: "https://tracker.gg/marvel-rivals/matches/example" };
+
+test("content-script messages cannot restore, clear data, or change player settings", async () => {
+  const w = workerFixture();
+  const before = structuredClone(w.values);
+  for (const message of [
+    restore(backup()),
+    { type: "heroTracker/clearData" },
+    { type: "heroTracker/setPlayerName", playerName: "InjectedName" }
+  ]) {
+    const response = await w.send(message, contentSender);
+    assert.equal(response.ok, false);
+    assert.match(response.error, /extension popup/);
+    assert.deepEqual(w.values, before);
+  }
+  assert.equal((await w.send(match("legitimate-match"), contentSender)).status, "recorded");
+});
+
+test("spoofed or missing sender metadata cannot perform privileged operations", async () => {
+  const w = workerFixture();
+  const before = structuredClone(w.values);
+  for (const sender of [
+    {},
+    { id: "other-extension", url: "chrome-extension://extension/popup.html" },
+    { id: "extension", url: "https://tracker.gg/marvel-rivals/matches/example" },
+    { id: "extension", url: "chrome-extension://extension/popup.html", tab: { id: 7 } }
+  ]) {
+    const response = await w.send(restore(backup()), sender);
+    assert.equal(response.ok, false);
+    assert.deepEqual(w.values, before);
+  }
+  assert.equal((await w.send(restore(backup()))).status, "restored");
 });
