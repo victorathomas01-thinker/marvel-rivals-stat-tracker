@@ -80,6 +80,24 @@ test("invalid backup is rejected before any writes and queue stays healthy", asy
   assert.equal((await w.send(match("new"))).status, "recorded");
 });
 
+test("restore worker rejects invalid hero names and excess hero counts without writing", async () => {
+  const w = workerFixture();
+  const before = structuredClone(w.values);
+  const invalid = [
+    { "   ": { losses: 1, appearances: 1, weightedLosses: 1, mvpSvpAppearances: 0 } },
+    { ["H".repeat(201)]: { losses: 1, appearances: 1, weightedLosses: 1, mvpSvpAppearances: 0 } },
+    Object.fromEntries(Array.from({ length: 1001 }, (_, i) => [
+      "Hero" + i, { losses: 1, appearances: 1, weightedLosses: 1, mvpSvpAppearances: 0 }
+    ]))
+  ];
+  for (const stats of invalid) {
+    const response = await w.send(restore(backup({ stats })));
+    assert.equal(response.ok, false);
+    assert.match(response.error, /Invalid hero names/);
+    assert.deepEqual(w.values, before);
+  }
+});
+
 test("restore waits behind pending match write and next match uses restored state", async () => {
   const w = workerFixture({ pauseWrites: true });
   const first = w.send(match("before"));

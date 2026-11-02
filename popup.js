@@ -81,7 +81,13 @@ function checkBackupDocument(backup) {
       new Set(backup.processedMatchIds).size !== backup.processedMatchIds.length) {
     throw new Error("Backup contains malformed tracking data; preserve it for troubleshooting.");
   }
-  return `Backup checked: ${backup.processedMatchIds.length} matches and ${Object.keys(backup.stats).length} heroes. Nothing imported.`;
+  // Keep popup preflight aligned with the worker's final restore validation.
+  // A backup should not appear restorable when the worker will reject it.
+  const heroNames = Object.keys(backup.stats);
+  if (heroNames.length > 1000 || heroNames.some((hero) => !hero.trim() || hero.length > 200)) {
+    throw new Error("Backup contains invalid hero names or too many heroes; nothing imported.");
+  }
+  return `Backup checked: ${backup.processedMatchIds.length} matches and ${heroNames.length} heroes. Nothing imported.`;
 }
 
 function renderStats(stats, processedMatches) {
