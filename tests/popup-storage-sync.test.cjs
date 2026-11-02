@@ -212,6 +212,32 @@ test("backup preflight rejects unsupported versions and malformed data without w
   assert.deepEqual(popup.values, original);
 });
 
+test("backup preflight rejects hero names and counts that the restore worker would reject", async () => {
+  const popup = loadPopup({ Luna: stat(1) });
+  const before = structuredClone(popup.values);
+  const invalid = [
+    { "   ": stat(1) },
+    { ["H".repeat(201)]: stat(1) },
+    Object.fromEntries(Array.from({ length: 1001 }, (_, i) => ["Hero" + i, stat(1)]))
+  ];
+  for (const stats of invalid) {
+    const result = await inspectBackup(popup, JSON.stringify(validFullBackup({ stats })));
+    assert.match(result, /invalid hero names or too many heroes/);
+    assert.equal(popup.getElement("restoreBackup").disabled, true);
+    popup.click("restoreBackup");
+    assert.deepEqual(popup.values, before);
+  }
+});
+
+test("backup preflight accepts the worker's exact hero-name and count boundaries", async () => {
+  const popup = loadPopup();
+  const stats = Object.fromEntries(Array.from({ length: 1000 }, (_, i) => [
+    i === 0 ? "H".repeat(200) : "Hero" + i, stat(1)
+  ]));
+  assert.match(await inspectBackup(popup, JSON.stringify(validFullBackup({ stats }))), /Nothing imported/);
+  assert.equal(popup.getElement("restoreBackup").disabled, false);
+});
+
 test("backup preflight rejects invalid JSON and oversized files", async () => {
   const popup = loadPopup();
   assert.match(await inspectBackup(popup, "{bad json"), /Invalid JSON/);
