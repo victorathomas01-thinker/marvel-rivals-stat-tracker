@@ -1,0 +1,181 @@
+const test = require("node:test");
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+const vm = require("node:vm");
+
+function workerFixture({ pauseWrites = false, empty = false } = {}) {
+  const values = empty ? {} : {
+    heroTrackerStats: { Luna: { losses: 1, appearances: 1, weightedLosses: 1, mvpSvpAppearances: 0 } },
+    heroTrackerProcessedMatches: ["old"],
+    heroTrackerPlayerName: "OldPlayer"
+  };
+  const queuedWrites = [];
+  let failNextSet = false;
+  let listener;
+  const chrome = {
+    runtime: {
+      id: "extension",
+      getURL: path => "chrome-extension://extension/" + path,
+      lastError: null,
+      onMessage: { addListener(fn) { listener = fn; } }
+    },
+    storage: { local: {
+      get(keys, callback) { callback(Object.fromEntries(keys.map(key => [key, values[key]]))); },
+      set(update, callback) {
+        const apply = () => {
+          Object.assign(values, structuredClone(update));
+          if (failNextSet) {
+            failNextSet = false;
+            chrome.runtime.lastError = { message: "simulated write failure" };
+            callback();
+            chrome.runtime.lastError = null;
+          } else callback();
+        };
+        if (pauseWrites) queuedWrites.push(apply); else apply();
+      },
+      remove(keys, callback) { for (const key of keys) delete values[key]; callback(); }
+    } }
+  };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, "..", "background.js"), "utf8"), { chrome, structuredClone });
+  return {
+    values, queuedWrites,
+    failOnce() { failNextSet = true; },
+    send(message, sender = { id: "extension", url: "chrome-extension://extension/popup.html" }) {
+      return new Promise(resolve => listener(message, sender, resolve));
+    }
+  };
+}
+
+const backup = (overrides = {}) => ({
+  schemaVersion: 1,
+  exportedAt: "2026-10-31T12:00:00.000Z",
+  playerName: "RestoredPlayer",
+  stats: { Storm: { losses: 2, appearances: 2, weightedLosses: 2.2, mvpSvpAppearances: 1 } },
+  processedMatchIds: ["a", "b"],
+  ...overrides
+});
+const restore = b => ({ type: "heroTracker/restoreBackup", backup: b });
+const match = id => ({ type: "heroTracker/recordMatch", matchId: id, outcome: "loss", heroEntries: [{ hero: "Storm", hasAward: false }] });
+const nextTurn = () => new Promise(resolve => setImmediate(resolve));
+
+test("valid full restore replaces all three keys in one worker operation", async () => {
+  const w = workerFixture();
+  const result = await w.send(restore(backup()));
+  assert.equal(result.ok, true);
+  assert.equal(result.status, "restored");
+  assert.equal(result.matches, 2);
+  assert.deepEqual(w.values.heroTrackerProcessedMatches, ["a", "b"]);
+  assert.equal(w.values.heroTrackerStats.Storm.weightedLosses, 2.2);
+  assert.equal(w.values.heroTrackerPlayerName, "RestoredPlayer");
+  assert.equal(Object.hasOwn(w.values.heroTrackerStats, "Luna"), false);
+});
+
+test("invalid backup is rejected before any writes and queue stays healthy", async () => {
+  const w = workerFixture();
+  const original = structuredClone(w.values);
+  const rejected = await w.send(restore(backup({ processedMatchIds: ["a", "a"] })));
+  assert.equal(rejected.ok, false);
+  assert.deepEqual(w.values, original);
+  assert.equal((await w.send(match("new"))).status, "recorded");
+});
+
+test("restore worker rejects invalid hero names and excess hero counts without writing", async () => {
+  const w = workerFixture();
+  const before = structuredClone(w.values);
+  const invalid = [
+    { "   ": { losses: 1, appearances: 1, weightedLosses: 1, mvpSvpAppearances: 0 } },
+    { ["H".repeat(201)]: { losses: 1, appearances: 1, weightedLosses: 1, mvpSvpAppearances: 0 } },
+    Object.fromEntries(Array.from({ length: 1001 }, (_, i) => [
+      "Hero" + i, { losses: 1, appearances: 1, weightedLosses: 1, mvpSvpAppearances: 0 }
+    ]))
+  ];
+  for (const stats of invalid) {
+    const response = await w.send(restore(backup({ stats })));
+    assert.equal(response.ok, false);
+    assert.match(response.error, /Invalid hero names/);
+    assert.deepEqual(w.values, before);
+  }
+});
+
+test("restore waits behind pending match write and next match uses restored state", async () => {
+  const w = workerFixture({ pauseWrites: true });
+  const first = w.send(match("before"));
+  const restoring = w.send(restore(backup()));
+  const after = w.send(match("after"));
+  await nextTurn();
+  assert.equal(w.queuedWrites.length, 1);
+  w.queuedWrites.shift()();
+  await nextTurn();
+  assert.equal(w.queuedWrites.length, 1);
+  w.queuedWrites.shift()();
+  await nextTurn();
+  assert.equal(w.queuedWrites.length, 1);
+  w.queuedWrites.shift()();
+  await Promise.all([first, restoring, after]);
+  assert.deepEqual(w.values.heroTrackerProcessedMatches, ["a", "b", "after"]);
+  assert.equal(w.values.heroTrackerStats.Storm.losses, 3);
+});
+
+test("failed partial write restores the previous values", async () => {
+  const w = workerFixture();
+  const original = structuredClone(w.values);
+  w.failOnce();
+  const result = await w.send(restore(backup()));
+  assert.equal(result.ok, false);
+  assert.match(result.error, /previous data was restored/);
+  assert.deepEqual(w.values, original);
+});
+
+test("failed restore removes keys that did not exist before", async () => {
+  const w = workerFixture({ empty: true });
+  w.failOnce();
+  const result = await w.send(restore(backup()));
+  assert.equal(result.ok, false);
+  assert.deepEqual(w.values, {});
+});
+
+test("player setting changes use the same queue as restore", async () => {
+  const w = workerFixture();
+  const [restored, saved] = await Promise.all([
+    w.send(restore(backup())),
+    w.send({ type: "heroTracker/setPlayerName", playerName: "NewName" })
+  ]);
+  assert.equal(restored.ok, true);
+  assert.equal(saved.ok, true);
+  assert.equal(w.values.heroTrackerPlayerName, "NewName");
+});
+
+const contentSender = { id: "extension", tab: { id: 42 }, url: "https://tracker.gg/marvel-rivals/matches/example" };
+
+test("content-script messages cannot restore, clear data, or change player settings", async () => {
+  const w = workerFixture();
+  const before = structuredClone(w.values);
+  for (const message of [
+    restore(backup()),
+    { type: "heroTracker/clearData" },
+    { type: "heroTracker/setPlayerName", playerName: "InjectedName" }
+  ]) {
+    const response = await w.send(message, contentSender);
+    assert.equal(response.ok, false);
+    assert.match(response.error, /extension popup/);
+    assert.deepEqual(w.values, before);
+  }
+  assert.equal((await w.send(match("legitimate-match"), contentSender)).status, "recorded");
+});
+
+test("spoofed or missing sender metadata cannot perform privileged operations", async () => {
+  const w = workerFixture();
+  const before = structuredClone(w.values);
+  for (const sender of [
+    {},
+    { id: "other-extension", url: "chrome-extension://extension/popup.html" },
+    { id: "extension", url: "https://tracker.gg/marvel-rivals/matches/example" },
+    { id: "extension", url: "chrome-extension://extension/popup.html", tab: { id: 7 } }
+  ]) {
+    const response = await w.send(restore(backup()), sender);
+    assert.equal(response.ok, false);
+    assert.deepEqual(w.values, before);
+  }
+  assert.equal((await w.send(restore(backup()))).status, "restored");
+});

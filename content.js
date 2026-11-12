@@ -6,14 +6,22 @@ const STORAGE_KEYS = {
 
 const DEFAULT_PLAYER_NAME = "MrKilometer";
 const MVP_WEIGHT = 1.2;
-const MAX_PROCESSED_MATCHES = 500;
 
 function storageGet(keys) {
   return new Promise((resolve) => chrome.storage.local.get(keys, resolve));
 }
 
-function storageSet(values) {
-  return new Promise((resolve) => chrome.storage.local.set(values, resolve));
+function sendTrackerMessage(message) {
+  return new Promise((resolve, reject) => {
+    chrome.runtime.sendMessage(message, (response) => {
+      const error = chrome.runtime.lastError;
+      if (error || !response?.ok) {
+        reject(new Error(error?.message || response?.error || "Tracker storage request failed."));
+      } else {
+        resolve(response);
+      }
+    });
+  });
 }
 
 function getMatchId() {
@@ -43,11 +51,16 @@ function getTeamScore(teamName) {
 }
 
 function getPlayerTeam(playerName, teamATable, teamBTable) {
-  const normalized = playerName.trim().toLowerCase();
+  const normalized = playerName.trim();
   if (!normalized) return null;
 
+  // A substring match can mistake "Space" for player "Ace" and
+  // attribute the opponent's heroes to the wrong team.
+  // Escape punctuation in player names and require name boundaries.
+  const escaped = normalized.replace(/[.*+?^$()|[\]{}\\]/g, "\\$&");
+  const exactName = new RegExp("(^|[^\\p{L}\\p{N}_])" + escaped + "(?=$|[^\\p{L}\\p{N}_])", "iu");
   const tableHasPlayer = (table) => [...table.querySelectorAll("tbody tr")].some((row) =>
-    row.textContent.toLowerCase().includes(normalized)
+    exactName.test(row.textContent || "")
   );
 
   if (tableHasPlayer(teamATable)) return "Team A";
@@ -83,13 +96,20 @@ function updateStats(currentStats, heroEntries) {
   const nextStats = structuredClone(currentStats || {});
 
   for (const { hero, weight, hasAward } of heroEntries) {
-    if (!nextStats[hero]) {
-      nextStats[hero] = {
-        losses: 0,
-        appearances: 0,
-        weightedLosses: 0,
-        mvpSvpAppearances: 0
-      };
+    if (!Object.hasOwn(nextStats, hero)) {
+      // Hero labels come from page markup. Define an own property so names like
+      // "__proto__" or "constructor" cannot resolve through Object.prototype.
+      Object.defineProperty(nextStats, hero, {
+        value: {
+          losses: 0,
+          appearances: 0,
+          weightedLosses: 0,
+          mvpSvpAppearances: 0
+        },
+        enumerable: true,
+        writable: true,
+        configurable: true
+      });
     }
 
     nextStats[hero].losses += 1;
@@ -110,6 +130,16 @@ function rankThreats(stats) {
     );
 }
 
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
 function renderOverlay(stats, message) {
   document.getElementById("hero-tracker-overlay")?.remove();
 
@@ -121,7 +151,7 @@ function renderOverlay(stats, message) {
     ? threats.map(([hero, data], index) => `
         <li>
           <span class="hero-tracker-rank">${index + 1}</span>
-          <span class="hero-tracker-hero">${hero}</span>
+          <span class="hero-tracker-hero">${escapeHtml(hero)}</span>
           <span class="hero-tracker-score">${data.weightedLosses.toFixed(1)}</span>
         </li>`).join("")
     : "<li class=\"hero-tracker-empty\">No losses recorded yet.</li>";
@@ -129,7 +159,7 @@ function renderOverlay(stats, message) {
   overlay.innerHTML = `
     <button class="hero-tracker-close" type="button" aria-label="Close">×</button>
     <h2>Top Threats</h2>
-    <p class="hero-tracker-message">${message}</p>
+    <p class="hero-tracker-message">${escapeHtml(message)}</p>
     <ol>${threatMarkup}</ol>
     <p class="hero-tracker-note">Score = losses, with MVP/SVP rows weighted 1.2×.</p>
   `;
@@ -163,22 +193,22 @@ async function processMatch() {
   }
 
   const matchId = getMatchId();
-  const processedMatches = stored[STORAGE_KEYS.processedMatches] || [];
   const currentStats = stored[STORAGE_KEYS.stats] || {};
-
-  if (processedMatches.includes(matchId)) {
-    renderOverlay(currentStats, "This match was already processed.");
-    return true;
-  }
+  // The background worker is the authority for duplicate detection.
+  // A snapshot taken here may be stale after another tab or Clear Data runs.
 
   const playerScore = playerTeam === "Team A" ? scoreA : scoreB;
   const opponentScore = playerTeam === "Team A" ? scoreB : scoreA;
 
   if (playerScore >= opponentScore) {
-    await storageSet({
-      [STORAGE_KEYS.processedMatches]: [...processedMatches, matchId].slice(-MAX_PROCESSED_MATCHES)
+    const result = await sendTrackerMessage({
+      type: "heroTracker/recordMatch",
+      matchId,
+      outcome: playerScore === opponentScore ? "draw" : "win"
     });
-    renderOverlay(currentStats, playerScore === opponentScore ? "Draw detected — no loss data added." : "Win detected — no loss data added.");
+    renderOverlay(result.stats, result.status === "duplicate"
+      ? "This match was already processed."
+      : playerScore === opponentScore ? "Draw detected — no loss data added." : "Win detected — no loss data added.");
     return true;
   }
 
@@ -190,15 +220,15 @@ async function processMatch() {
     return true;
   }
 
-  const nextStats = updateStats(currentStats, heroEntries);
-  const nextProcessed = [...processedMatches, matchId].slice(-MAX_PROCESSED_MATCHES);
-
-  await storageSet({
-    [STORAGE_KEYS.stats]: nextStats,
-    [STORAGE_KEYS.processedMatches]: nextProcessed
+  const result = await sendTrackerMessage({
+    type: "heroTracker/recordMatch",
+    matchId,
+    outcome: "loss",
+    heroEntries
   });
-
-  renderOverlay(nextStats, `Loss recorded. Added ${heroEntries.length} opponent hero appearance${heroEntries.length === 1 ? "" : "s"}.`);
+  renderOverlay(result.stats, result.status === "duplicate"
+    ? "This match was already processed."
+    : `Loss recorded. Added ${heroEntries.length} opponent hero appearance${heroEntries.length === 1 ? "" : "s"}.`);
   return true;
 }
 
@@ -206,14 +236,20 @@ function waitForMatchData() {
   let attempts = 0;
   const maxAttempts = 20;
 
-  const timer = window.setInterval(async () => {
+  // Schedule the next attempt only after the previous storage operation finishes.
+  // setInterval can start a second read/write before the first has saved its match ID.
+  const poll = async () => {
     attempts += 1;
-    const processed = await processMatch();
-
-    if (processed || attempts >= maxAttempts) {
-      window.clearInterval(timer);
+    try {
+      if (await processMatch()) return;
+    } catch (error) {
+      console.warn("Hero Tracker: match processing failed.", error);
     }
-  }, 500);
+
+    if (attempts < maxAttempts) window.setTimeout(poll, 500);
+  };
+
+  window.setTimeout(poll, 500);
 }
 
 waitForMatchData();

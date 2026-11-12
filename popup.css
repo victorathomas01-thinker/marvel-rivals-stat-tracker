@@ -109,7 +109,13 @@ li {
   margin-top: 16px;
 }
 
+.actions #exportBackup {
+  grid-column: 1 / -1;
+}
+
 .actions .danger {
   grid-column: 1 / -1;
   border-color: #7a3d49;
 }
+
+#backupFile { width: 100%; }
