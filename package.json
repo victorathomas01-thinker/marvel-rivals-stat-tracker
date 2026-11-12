@@ -6,9 +6,13 @@
   "scripts": {
     "check": "node --check content.js && node --check popup.js && node --check background.js",
     "test": "node --test tests/*.test.cjs",
-    "verify": "npm run check && npm test"
+    "verify": "npm run check && npm test",
+    "test:browser": "node --test tests/browser-chrome-smoke.cjs"
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
   }
 }
