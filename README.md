@@ -2,6 +2,18 @@
 
 A Chrome extension for analyzing personal **Marvel Rivals** match history on Tracker.gg and surfacing the enemy heroes that appear most often in losses.
 
+## At a glance
+
+**Stack:** JavaScript, Chrome Extensions Manifest V3, Chrome Storage API, DOM parsing, JSON/CSV exports.
+
+**Problem:** Match history lists results, but doesn't directly answer which opposing heroes repeatedly appear in a player's losses.
+
+**Solution:** This extension inspects an individual match-detail page, attributes the configured player to a team, extracts opposing hero appearances after losses, applies a transparent MVP/SVP weight, and displays the five highest-ranked threats.
+
+**Current state:** The default branch is a functional local extension prototype, **not** a Chrome Web Store release. It depends on Tracker.gg's page markup. A [separate consolidated development PR](https://github.com/victorathomas01-thinker/marvel-rivals-stat-tracker/pull/15) adds stronger storage/recovery safeguards and automated Chromium testing; those improvements remain unmerged and should not be confused with the default branch.
+
+**What this demonstrates:** Building a browser extension, extracting structured data from a changing DOM, handling browser storage, deduplicating events, and presenting an actionable metric.
+
 ## What It Does
 
 The extension reads individual Tracker.gg match pages, determines which team the configured player is on, checks the final score, and records opposing heroes only when that player loses.
