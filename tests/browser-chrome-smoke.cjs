@@ -28,7 +28,7 @@ async function download(popup, button) {
   return fs.readFileSync(await item.path(), 'utf8');
 }
 
-test('MV3 extension in disposable Chromium: match, duplicate, export, restore and authorization', { timeout: 120000 }, async () => {
+test('MV3 extension in disposable Chromium: matches, exports and sender boundaries', { timeout: 120000 }, async () => {
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), 'tracker-smoke-'));
   let browser;
   try {
@@ -71,7 +71,8 @@ test('MV3 extension in disposable Chromium: match, duplicate, export, restore an
     assert.equal(backup.schemaVersion, 1);
     assert.equal(backup.processedMatchIds.length, 4);
 
-    // Same extension origin but NOT the actual popup URL must not clear data.
+    // A regular tab displaying popup.html has sender.tab metadata and is deliberately
+    // NOT the privileged Chrome toolbar popup. Never widen worker permissions for tests.
     const spoof = await browser.newPage();
     await spoof.goto('chrome-extension://' + id + '/popup.html?not-the-popup=1');
     const denied = await spoof.evaluate(() => new Promise(resolve => chrome.runtime.sendMessage({ type: 'heroTracker/clearData' }, resolve)));
@@ -85,16 +86,17 @@ test('MV3 extension in disposable Chromium: match, duplicate, export, restore an
     await popup.waitForFunction(() => !document.querySelector('#restoreBackup').disabled);
     popup.once('dialog', dialog => dialog.accept());
     await popup.locator('#restoreBackup').click();
-    await popup.waitForFunction(() => /^(Restored |Restore failed:)/.test(document.querySelector('#backupStatus').textContent));
-    assert.match(await popup.locator('#backupStatus').innerText(), /^Restored /);
+    await popup.waitForFunction(() => document.querySelector('#backupStatus').textContent.startsWith('Restore failed:'));
+    assert.match(await popup.locator('#backupStatus').innerText(), /only available from the extension popup/i);
     assert.deepEqual((await stored(popup)).heroTrackerProcessedMatches, backup.processedMatchIds);
     await popup.reload();
     assert.deepEqual((await stored(popup)).heroTrackerStats, backup.stats);
 
     popup.once('dialog', dialog => dialog.accept());
     await popup.locator('#clearData').click();
-    await popup.waitForFunction(() => document.querySelector('#matchCount').textContent.includes('0 matches seen'));
-    assert.equal((await stored(popup)).heroTrackerProcessedMatches, undefined);
+    await popup.waitForFunction(() => document.querySelector('#saveStatus').textContent.includes('Unable to clear data'));
+    assert.equal((await stored(popup)).heroTrackerProcessedMatches.length, 4);
+    // Real toolbar-popup restore/clear testing stays pending in C7-C10 manual acceptance.
   } finally {
     if (browser) await browser.close().catch(() => {});
     fs.rmSync(profile, { recursive: true, force: true });
