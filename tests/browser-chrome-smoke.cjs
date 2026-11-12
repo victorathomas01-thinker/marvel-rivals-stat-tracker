@@ -85,7 +85,8 @@ test('MV3 extension in disposable Chromium: match, duplicate, export, restore an
     await popup.waitForFunction(() => !document.querySelector('#restoreBackup').disabled);
     popup.once('dialog', dialog => dialog.accept());
     await popup.locator('#restoreBackup').click();
-    await popup.waitForFunction(() => document.querySelector('#backupStatus').textContent.startsWith('Restored '));
+    await popup.waitForFunction(() => /^(Restored |Restore failed:)/.test(document.querySelector('#backupStatus').textContent));
+    assert.match(await popup.locator('#backupStatus').innerText(), /^Restored /);
     assert.deepEqual((await stored(popup)).heroTrackerProcessedMatches, backup.processedMatchIds);
     await popup.reload();
     assert.deepEqual((await stored(popup)).heroTrackerStats, backup.stats);
