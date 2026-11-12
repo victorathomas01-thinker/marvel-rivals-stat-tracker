@@ -51,3 +51,11 @@ These are *implementation scopes inferred from the source PRs*. They do not prov
 - **TasteSocial public demo:** preserve its published build `4b88f2777c1c2ecd7020b73623390d4142941ba3`. Do not republish the separate demo artifact as part of Tasteprint cleanup.
 - **Personal Job Agent:** preserve `main` at `11af6a262859847b7507ed9eca69480a5bff032f`; do not enable unattended live submissions.
 - **Throwback TV:** paused; no new streaming integrations or deployment work.
+
+## Isolated automated Chromium smoke test (2026-11-12)
+
+- Added `tests/browser-chrome-smoke.cjs` using synthetic, fully intercepted Tracker.gg match pages and a temporary Chromium profile. It never uses the user's ordinary Chrome profile or real Tracker.gg traffic.
+- Covers multi-tab writes, deduplication, wins/draws, popup statistics rendering, legacy exports and versioned backup exports; checks backup preflight and that a browser-tab copy of popup.html cannot invoke privileged restore/clear commands.
+- **Important distinction:** a regular extension page opened as a tab has sender.tab metadata and is not the actual toolbar popup. Its restore/clear requests must be rejected. Do not weaken the authorization check just to make an automated test pass.
+- The smoke test does **not** establish that restore, clear or backup rollback works from the real Chrome toolbar popup. C7–C10 and actual Tracker.gg parsing still require separately recorded browser acceptance before merge.
+- CI has a dedicated browser-smoke job; a successful Node suite by itself does not certify the browser-smoke job.
