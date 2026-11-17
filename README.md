@@ -1,5 +1,7 @@
 # Marvel Rivals Stat Tracker
 
+[Release instructions](RELEASE.md)
+
 A Chrome extension that turns visited Tracker.gg match pages into personal matchup history and observed loss rates.
 
 **[Two-minute walkthrough](DEMO.md) · [Install the extension](#install-locally) · [Data and exports](#data-model)**
