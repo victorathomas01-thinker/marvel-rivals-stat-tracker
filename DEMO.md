@@ -1,5 +1,9 @@
 # Marvel Rivals walkthrough
 
+## Before presenting
+
+Download the branch or the offline-demo artifact from the draft PR's linked Actions run. Extract the bundle and open `demo.html`. The page starts with synthetic records. Have a version 1 export ready if you want to show replay.
+
 | Time | Show | Say |
 | --- | --- | --- |
 | 0:00–0:25 | Open `demo.html` | “This extension records the match pages I visit and shows my observed loss rates against each hero.” |
