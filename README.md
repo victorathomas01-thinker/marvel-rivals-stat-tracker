@@ -21,6 +21,10 @@ A Chrome extension that turns visited Tracker.gg match pages into personal match
 
 **Interpretation.** Rates describe the matches you visited. Hero combinations, maps, opponents, and sample selection affect them. The popup displays heroes after five encounters.
 
+## Power BI case study
+
+[Matchup analytics](analytics/power-bi/README.md) contains a reproducible synthetic export, metric definitions, and the five-round report plan. Native report development follows the data preparation rounds.
+
 ## Release status
 
 This branch contains the extension release candidate and its offline demo.

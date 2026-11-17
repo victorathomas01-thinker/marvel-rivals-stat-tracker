@@ -1,0 +1,13 @@
+{
+  "synthetic": true,
+  "seed": 20261117,
+  "matches": 360,
+  "outcomes": {
+    "win": 179,
+    "loss": 169,
+    "draw": 12
+  },
+  "missing_recorded_at": 13,
+  "missing_scores": 10,
+  "repeated_hero_rows": 33
+}
