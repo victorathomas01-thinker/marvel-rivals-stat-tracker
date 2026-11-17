@@ -61,7 +61,7 @@ function weightedStats(stored, player) {
     .filter(([key, match]) => key.startsWith(MATCH_KEY_PREFIX)
       && match.player === player && match.outcome === "loss")
     .flatMap(([, match]) => match.heroes);
-  return updateStats(stored.heroTrackerStats, entries);
+  return updateStats({}, entries);
 }
 
 function exportMatchHistory(stored, player) {

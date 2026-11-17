@@ -29,7 +29,9 @@ test("analytics count distinct encounters, filter by player, and omit draws and 
   assert.equal(results[0].hero, "Storm");
   assert.equal(results[0].rate, 0.4);
   assert.ok(results[0].low < 0.4 && results[0].high > 0.4);
-  assert.equal(context.weightedStats(stats, "player").Legacy.losses, 2);
+  assert.equal(context.weightedStats(stats, "player").Legacy, undefined);
+  assert.equal(context.weightedStats(stats, "someone else").Legacy, undefined);
+  assert.equal(context.weightedStats(stats, "player").Storm.losses, 4);
 });
 
 test("two tabs recording the same match only write once", async () => {

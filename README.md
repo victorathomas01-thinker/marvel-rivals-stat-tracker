@@ -111,7 +111,7 @@ The threat list is sorted primarily by `weightedLosses`, then raw losses and app
 
 Each hero counts at most once per match in the rate view. After five encounters, the popup shows losses divided by recorded wins plus losses and a 95% Wilson interval. It ranks heroes by the lower bound of that interval. These are descriptive rates from visited matches. Maps and co-occurring heroes can affect the result.
 
-New records are scoped to the configured player and retained until you clear tracked data or remove the extension. Earlier versions stored only totals and up to 500 recent IDs. Those totals still appear in the weighted view and known IDs are skipped. The rate view uses new records. Matches whose IDs had already expired in the earlier version can overlap with legacy totals if revisited.
+New records are scoped to the configured player and retained until you clear tracked data or remove the extension. Earlier versions stored only totals and up to 500 recent IDs. Those totals are available separately as unassigned legacy data and known IDs are skipped. The rate view uses new records. Matches whose IDs had already expired in the earlier version can overlap with legacy totals if revisited.
 
 ## Match-history export
 
@@ -177,3 +177,7 @@ The project became an exercise in DOM inspection, data extraction, defensive par
 ## Disclaimer
 
 This is an independent personal project and is not affiliated with, endorsed by, or sponsored by Marvel, NetEase Games, or Tracker.gg. Product and character names belong to their respective owners.
+
+## Data interpretation update
+
+Player statistics and match counts use player-scoped records. Earlier global totals are available separately through Export Earlier Totals. Legacy processed IDs remain reserved because their player identity cannot be recovered.

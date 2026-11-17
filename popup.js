@@ -56,7 +56,11 @@ async function refresh() {
   const player = playerName.trim().toLowerCase();
   const history = exportMatchHistory(stored, player);
   const stats = weightedStats(stored, player);
-  renderStats(stats, [...(stored[STORAGE_KEYS.processedMatches] || []), ...history.matches]);
+  renderStats(stats, history.matches);
+  const legacy = stored[STORAGE_KEYS.stats] || {};
+  document.getElementById("legacyData").hidden = Object.keys(legacy).length === 0;
+  document.getElementById("exportLegacy").onclick = () =>
+    download("marvel-rivals-legacy-totals.json", JSON.stringify(legacy, null, 2), "application/json");
 
   renderMatchups(summarizeMatchups(stored, playerName));
   renderRecentMatches(history.matches);
