@@ -36,10 +36,15 @@ test("two tabs recording the same match only write once", async () => {
   const stored = {};
   let listener;
   let writes = 0;
+  const reads = [];
   const context = vm.createContext({ importScripts: () => {}, chrome: {
     runtime: { onMessage: { addListener: (fn) => { listener = fn; } }, getURL: (file) => "chrome-extension://test/" + file },
     storage: { local: {
-      get: async () => ({ ...stored }),
+      get: async (keys) => {
+        reads.push(keys);
+        return keys === null ? { ...stored } : Object.fromEntries(
+          keys.filter((key) => Object.hasOwn(stored, key)).map((key) => [key, stored[key]]));
+      },
       set: async (values) => { writes += 1; Object.assign(stored, values); },
       remove: async (keys) => keys.forEach((key) => delete stored[key])
     } }
@@ -52,6 +57,8 @@ test("two tabs recording the same match only write once", async () => {
   const results = await Promise.all([record(), record()]);
   assert.deepEqual(results.map((result) => result.duplicate), [false, true]);
   assert.equal(writes, 1);
+  assert.equal(reads.length, 2);
+  assert.ok(reads.every((keys) => keys.length === 2 && keys.includes("heroTrackerProcessedMatches")));
   await new Promise((resolve) => listener({ type: "clearMatches" },
     { url: "chrome-extension://test/popup.html" }, resolve));
   assert.deepEqual(Object.keys(stored), []);
@@ -98,4 +105,18 @@ test("an export reproduces the live matchup rates and rejects duplicate records"
   assert.deepEqual(context.rankMatchups(context.readHistory(payload)), context.summarizeMatchups(records, "player"));
   assert.throws(() => context.readHistory({ schemaVersion: 1, matches: [...payload.matches, payload.matches[0]] }),
     /Invalid match record/);
+});
+
+test("scores require a complete nonnegative safe integer", () => {
+  const label = { textContent: "Team A" };
+  const value = { textContent: " 2 " };
+  const entry = { querySelector: (selector) => selector === ".label" ? label : value };
+  const document = { querySelector: () => ({ querySelectorAll: () => [entry] }) };
+  const context = vm.createContext({ document, window: { setTimeout: () => {} } });
+  load(context, "content.js");
+  assert.equal(context.getTeamScore("Team A"), 2);
+  for (const text of ["2–1", "-1", "2 OT", "9007199254740993", ""]) {
+    value.textContent = text;
+    assert.equal(context.getTeamScore("Team A"), null);
+  }
 });

@@ -89,6 +89,8 @@ New records are scoped to the configured player and retained until you clear tra
 
 The popup also shows the five most recently recorded matches for the selected player. The offline demo can open an exported JSON file locally and runs the same encounter calculations as the popup. Imported exports remain in the demo tab's memory.
 
+The popup shows observed loss rates first. Expand **Weighted loss totals** to see the historical scoring view and use the summary export buttons for its CSV or JSON.
+
 ## Offline demo
 
 Open `demo.html` in a browser to see the matchup view populated with synthetic matches.

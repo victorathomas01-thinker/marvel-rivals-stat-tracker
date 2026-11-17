@@ -29,8 +29,10 @@ function getTeamScore(teamName) {
   });
 
   if (!entry) return null;
-  const score = Number.parseInt(entry.querySelector(".value")?.textContent?.trim() ?? "", 10);
-  return Number.isFinite(score) ? score : null;
+  const value = entry.querySelector(".value")?.textContent.trim() ?? "";
+  if (!/^[0-9]+$/.test(value)) return null;
+  const score = Number(value);
+  return Number.isSafeInteger(score) ? score : null;
 }
 
 function getPlayerTeam(playerName, teamATable, teamBTable) {
@@ -115,14 +117,13 @@ async function processMatch() {
     return false;
   }
 
-  const stored = await chrome.storage.local.get(null);
+  const stored = await chrome.storage.local.get(STORAGE_KEYS.playerName);
   const playerName = stored[STORAGE_KEYS.playerName] || DEFAULT_PLAYER_NAME;
   const player = playerName.trim().toLowerCase();
   const playerTeam = getPlayerTeam(playerName, teamATable, teamBTable);
-  const currentStats = weightedStats(stored, player);
-
   if (!playerTeam) {
-    renderOverlay(currentStats, `Player “${playerName}” could not be identified on one team.`);
+    const history = await chrome.storage.local.get(null);
+    renderOverlay(weightedStats(history, player), `Player “${playerName}” could not be identified on one team.`);
     return false;
   }
 

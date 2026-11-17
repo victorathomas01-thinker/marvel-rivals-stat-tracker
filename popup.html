@@ -19,14 +19,9 @@
 
     <section>
       <div class="section-heading">
-        <h2>Top Threats</h2>
+        <h2>Observed loss rates</h2>
         <span id="matchCount"></span>
       </div>
-      <ol id="threatList"></ol>
-    </section>
-
-    <section>
-      <h2>Observed loss rates</h2>
       <p id="matchupEmpty">Heroes appear here after five recorded encounters.</p>
       <ol id="matchupList"></ol>
     </section>
@@ -36,6 +31,11 @@
       <p id="recentEmpty">New matches appear here in recording order.</p>
       <ol id="recentMatches"></ol>
     </section>
+
+    <details>
+      <summary>Weighted loss totals</summary>
+      <ol id="threatList"></ol>
+    </details>
 
     <div class="actions">
       <button id="exportJson" type="button">Export JSON</button>

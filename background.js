@@ -7,8 +7,8 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
   if (!(message.type === "recordMatch" && isMatchPage) && !(message.type === "clearMatches" && isPopup)) return;
 
   const operation = pending.then(async () => {
-    const stored = await chrome.storage.local.get(null);
     if (message.type === "clearMatches") {
+      const stored = await chrome.storage.local.get(null);
       const matchKeys = Object.keys(stored).filter((key) => key.startsWith(MATCH_KEY_PREFIX));
       await chrome.storage.local.remove([...matchKeys, "heroTrackerStats", "heroTrackerProcessedMatches"]);
       return {};
@@ -16,6 +16,7 @@ chrome.runtime.onMessage.addListener((message, sender, respond) => {
 
     const { match } = message;
     const key = MATCH_KEY_PREFIX + JSON.stringify([match.player, match.id]);
+    const stored = await chrome.storage.local.get([key, "heroTrackerProcessedMatches"]);
     if (Object.hasOwn(stored, key) || stored.heroTrackerProcessedMatches?.includes(match.id)) {
       return { duplicate: true };
     }
