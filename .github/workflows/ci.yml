@@ -24,3 +24,13 @@ jobs:
           name: marvel-rivals-stat-tracker-extension
           path: dist/marvel-rivals-stat-tracker.zip
           if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: marvel-rivals-offline-demo
+          path: |
+            demo.html
+            demo.js
+            match-data.js
+            matchup-view.js
+            popup.css
+          if-no-files-found: error
