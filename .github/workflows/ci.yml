@@ -1,0 +1,26 @@
+name: Tracker tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node --test tests/tracker.test.cjs
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright==1.64.1
+      - run: python -m playwright install --with-deps chromium
+      - run: python -B -m unittest discover -s tests -p test_extension.py
+      - run: python scripts/package_extension.py dist/marvel-rivals-stat-tracker.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: marvel-rivals-stat-tracker-extension
+          path: dist/marvel-rivals-stat-tracker.zip
+          if-no-files-found: error

@@ -4,7 +4,7 @@ A Chrome extension for analyzing personal **Marvel Rivals** match history on Tra
 
 ## What It Does
 
-The extension reads individual Tracker.gg match pages, determines which team the configured player is on, checks the final score, and records opposing heroes only when that player loses.
+The extension reads individual Tracker.gg match pages, determines which team the configured player is on, checks the final score, and records opposing heroes on wins and losses. Draws are stored for deduplication.
 
 Enemy heroes associated with an MVP or SVP row receive a **1.2× weighted-loss value**, making standout performances count slightly more heavily in the threat ranking.
 
@@ -12,7 +12,7 @@ Enemy heroes associated with an MVP or SVP row receive a **1.2× weighted-loss v
 
 - Detects the configured player on Team A or Team B
 - Reads match scores directly from the Tracker.gg match header
-- Records opponent heroes only on losses
+- Records opponent heroes on wins and losses
 - Supports multiple hero images for players who switched heroes during a match
 - Applies 1.2× weighting to MVP/SVP opponent rows
 - Deduplicates previously processed match IDs
@@ -39,15 +39,15 @@ Enemy heroes associated with an MVP or SVP row receive a **1.2× weighted-loss v
 2. Locate the Team A and Team B stat tables.
 3. Find the configured player name and determine that player's team.
 4. Read Team A and Team B scores from the match header.
-5. If the player lost, inspect the opposing team's player rows.
+5. Inspect the opponent rows.
 6. Extract hero names from hero-image metadata while ignoring non-hero images such as rank icons.
 7. Detect MVP/SVP labels and apply the 1.2× weight where appropriate.
-8. Save aggregated statistics and the processed match ID in Chrome storage.
-9. Rank heroes by weighted losses and display the top five.
+8. Save one record per player and match ID through the extension service worker.
+9. Show weighted loss totals and observed loss rates in the popup.
 
 ## Data Model
 
-Each tracked hero stores:
+The weighted loss view and its aggregate exports use this shape:
 
 ```json
 {
@@ -60,6 +60,13 @@ Each tracked hero stores:
 
 The threat list is sorted primarily by `weightedLosses`, then raw losses and appearances.
 
+## Two-minute walkthrough
+
+1. Open `demo.html` to see synthetic results and recent matches.
+2. Pick a hero and explain the encounter count and 95% interval.
+3. In the extension, export a match history and open it from the demo's file picker to reproduce the recent list and matchup rates.
+4. To build the installable bundle, run `python scripts/package_extension.py dist/marvel-rivals-stat-tracker.zip`. Extract the ZIP and use the folder containing `manifest.json` in the steps below.
+
 ## Install Locally
 
 1. Download or clone this repository.
@@ -70,12 +77,32 @@ The threat list is sorted primarily by `weightedLosses`, then raw losses and app
 6. Open the extension popup and confirm your Tracker.gg player name.
 7. Visit a Marvel Rivals match-detail page on Tracker.gg.
 
+### Observed loss rates
+
+Each hero counts at most once per match in the rate view. After five encounters, the popup shows losses divided by recorded wins plus losses and a 95% Wilson interval. It ranks heroes by the lower bound of that interval. These are descriptive rates from visited matches. Maps and co-occurring heroes can affect the result.
+
+New records are scoped to the configured player and retained until you clear tracked data or remove the extension. Earlier versions stored only totals and up to 500 recent IDs. Those totals still appear in the weighted view and known IDs are skipped. The rate view uses new records. Matches whose IDs had already expired in the earlier version can overlap with legacy totals if revisited.
+
+## Match-history export
+
+**Export Match History** downloads versioned JSON for the selected player. It contains match IDs, outcomes, scores when available, and opponent hero appearances. It omits the configured player label. Match IDs can still connect records to match pages. The timestamp is when the extension recorded the match. The export uses null for timestamps and scores that were unavailable in older records. Earlier aggregate-only data remains available through the summary exports.
+
+The popup also shows the five most recently recorded matches for the selected player. The offline demo can open an exported JSON file locally and runs the same encounter calculations as the popup. Imported exports remain in the demo tab's memory.
+
+## Offline demo
+
+Open `demo.html` in a browser to see the matchup view populated with synthetic matches.
+
 ## Validation
+
+Run `node --test tests/tracker.test.cjs` to check player lookup, duplicate writes, and encounter-rate math.
 
 The current parser was checked against saved Tracker.gg match-page fixtures representing both a loss and a win. In the loss fixture, the parser correctly isolated the opposing team and detected the MVP-weighted hero row. In the win fixture, it correctly skipped loss-stat updates.
 
 The saved fixture pages are not included in the public repository because they contain third-party page markup and player/match data.
 
+
+The Chromium integration test loads the unpacked extension against a synthetic scoreboard fixture. It covers wins, losses, draws, deduplication, and the downloadable history. Install Playwright with `python -m pip install playwright==1.64.1`, then install Chromium with `python -m playwright install chromium` and run `python -B -m unittest discover -s tests -p test_extension.py`. The fixture exercises the documented selectors and contains no copied player or match data. Live compatibility still requires an accessible Tracker.gg scoreboard.
 ## Engineering Decisions
 
 ### Narrow host permissions
@@ -98,7 +125,6 @@ The original prototype was built around one account. The public version makes th
 
 - The project depends on Tracker.gg's current DOM structure and may require selector updates if the site changes.
 - It processes individual match-detail pages as they are visited; automated traversal of an entire match history is not implemented yet.
-- The scoring model is intentionally simple and currently uses only loss frequency plus MVP/SVP weighting.
 - Automated browser tests are not yet included.
 
 ## Planned Improvements
@@ -107,7 +133,6 @@ The original prototype was built around one account. The public version makes th
 - More defensive selector fallbacks
 - Additional threat-ranking signals
 - Match-history and trend visualizations
-- Automated parser tests using sanitized fixtures
 - Optional Google Sheets synchronization
 - Portfolio screenshots and demo media
 
