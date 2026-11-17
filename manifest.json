@@ -1,20 +1,35 @@
 {
   "manifest_version": 3,
   "name": "Marvel Rivals Stat Tracker",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "description": "Analyzes Tracker.gg Marvel Rivals match pages to surface recurring enemy heroes in losses.",
-  "permissions": ["storage"],
-  "host_permissions": ["https://tracker.gg/marvel-rivals/matches/*"],
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://tracker.gg/marvel-rivals/matches/*"
+  ],
   "content_scripts": [
     {
-      "matches": ["https://tracker.gg/marvel-rivals/matches/*"],
-      "js": ["content.js"],
-      "css": ["content.css"],
+      "matches": [
+        "https://tracker.gg/marvel-rivals/matches/*"
+      ],
+      "js": [
+        "ranking.js",
+        "match-data.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
       "run_at": "document_idle"
     }
   ],
   "action": {
     "default_title": "Marvel Rivals Stat Tracker",
     "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
   }
 }

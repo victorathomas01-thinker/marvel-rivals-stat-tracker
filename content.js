@@ -6,15 +6,6 @@ const STORAGE_KEYS = {
 
 const DEFAULT_PLAYER_NAME = "MrKilometer";
 const MVP_WEIGHT = 1.2;
-const MAX_PROCESSED_MATCHES = 500;
-
-function storageGet(keys) {
-  return new Promise((resolve) => chrome.storage.local.get(keys, resolve));
-}
-
-function storageSet(values) {
-  return new Promise((resolve) => chrome.storage.local.set(values, resolve));
-}
 
 function getMatchId() {
   const parts = window.location.pathname.split("/").filter(Boolean);
@@ -38,21 +29,26 @@ function getTeamScore(teamName) {
   });
 
   if (!entry) return null;
-  const score = Number.parseInt(entry.querySelector(".value")?.textContent?.trim() ?? "", 10);
-  return Number.isFinite(score) ? score : null;
+  const value = entry.querySelector(".value")?.textContent.trim() ?? "";
+  if (!/^[0-9]+$/.test(value)) return null;
+  const score = Number(value);
+  return Number.isSafeInteger(score) ? score : null;
 }
 
 function getPlayerTeam(playerName, teamATable, teamBTable) {
   const normalized = playerName.trim().toLowerCase();
   if (!normalized) return null;
 
-  const tableHasPlayer = (table) => [...table.querySelectorAll("tbody tr")].some((row) =>
-    row.textContent.toLowerCase().includes(normalized)
-  );
+  const tableHasPlayer = (table) => [...table.querySelectorAll("tbody tr")].some((row) => {
+    const profiles = [...row.querySelectorAll('a[href*="/marvel-rivals/profile/"]')];
+    const labels = profiles.length ? profiles : [...row.cells];
+    return labels.some((label) => label.textContent.trim().toLowerCase() === normalized);
+  });
 
-  if (tableHasPlayer(teamATable)) return "Team A";
-  if (tableHasPlayer(teamBTable)) return "Team B";
-  return null;
+  const onA = tableHasPlayer(teamATable);
+  const onB = tableHasPlayer(teamBTable);
+  if (onA === onB) return null;
+  return onA ? "Team A" : "Team B";
 }
 
 function extractHeroEntries(teamTable) {
@@ -79,37 +75,6 @@ function extractHeroEntries(teamTable) {
   return entries;
 }
 
-function updateStats(currentStats, heroEntries) {
-  const nextStats = structuredClone(currentStats || {});
-
-  for (const { hero, weight, hasAward } of heroEntries) {
-    if (!nextStats[hero]) {
-      nextStats[hero] = {
-        losses: 0,
-        appearances: 0,
-        weightedLosses: 0,
-        mvpSvpAppearances: 0
-      };
-    }
-
-    nextStats[hero].losses += 1;
-    nextStats[hero].appearances += 1;
-    nextStats[hero].weightedLosses = Number((nextStats[hero].weightedLosses + weight).toFixed(2));
-    if (hasAward) nextStats[hero].mvpSvpAppearances += 1;
-  }
-
-  return nextStats;
-}
-
-function rankThreats(stats) {
-  return Object.entries(stats || {})
-    .sort(([, a], [, b]) =>
-      b.weightedLosses - a.weightedLosses ||
-      b.losses - a.losses ||
-      b.appearances - a.appearances
-    );
-}
-
 function renderOverlay(stats, message) {
   document.getElementById("hero-tracker-overlay")?.remove();
 
@@ -118,10 +83,10 @@ function renderOverlay(stats, message) {
 
   const threats = rankThreats(stats).slice(0, 5);
   const threatMarkup = threats.length
-    ? threats.map(([hero, data], index) => `
+    ? threats.map(([, data], index) => `
         <li>
           <span class="hero-tracker-rank">${index + 1}</span>
-          <span class="hero-tracker-hero">${hero}</span>
+          <span class="hero-tracker-hero"></span>
           <span class="hero-tracker-score">${data.weightedLosses.toFixed(1)}</span>
         </li>`).join("")
     : "<li class=\"hero-tracker-empty\">No losses recorded yet.</li>";
@@ -129,11 +94,15 @@ function renderOverlay(stats, message) {
   overlay.innerHTML = `
     <button class="hero-tracker-close" type="button" aria-label="Close">×</button>
     <h2>Top Threats</h2>
-    <p class="hero-tracker-message">${message}</p>
+    <p class="hero-tracker-message"></p>
     <ol>${threatMarkup}</ol>
     <p class="hero-tracker-note">Score = losses, with MVP/SVP rows weighted 1.2×.</p>
   `;
 
+  overlay.querySelector(".hero-tracker-message").textContent = message;
+  overlay.querySelectorAll(".hero-tracker-hero").forEach((label, index) => {
+    label.textContent = threats[index][0];
+  });
   overlay.querySelector(".hero-tracker-close").addEventListener("click", () => overlay.remove());
   document.body.appendChild(overlay);
 }
@@ -148,72 +117,46 @@ async function processMatch() {
     return false;
   }
 
-  const stored = await storageGet([
-    STORAGE_KEYS.stats,
-    STORAGE_KEYS.processedMatches,
-    STORAGE_KEYS.playerName
-  ]);
-
+  const stored = await chrome.storage.local.get(STORAGE_KEYS.playerName);
   const playerName = stored[STORAGE_KEYS.playerName] || DEFAULT_PLAYER_NAME;
+  const player = playerName.trim().toLowerCase();
   const playerTeam = getPlayerTeam(playerName, teamATable, teamBTable);
-
   if (!playerTeam) {
-    renderOverlay(stored[STORAGE_KEYS.stats] || {}, `Player “${playerName}” was not found on this match page.`);
-    return true;
-  }
-
-  const matchId = getMatchId();
-  const processedMatches = stored[STORAGE_KEYS.processedMatches] || [];
-  const currentStats = stored[STORAGE_KEYS.stats] || {};
-
-  if (processedMatches.includes(matchId)) {
-    renderOverlay(currentStats, "This match was already processed.");
-    return true;
+    const history = await chrome.storage.local.get(null);
+    renderOverlay(weightedStats(history, player), `Player “${playerName}” could not be identified on one team.`);
+    return false;
   }
 
   const playerScore = playerTeam === "Team A" ? scoreA : scoreB;
   const opponentScore = playerTeam === "Team A" ? scoreB : scoreA;
-
-  if (playerScore >= opponentScore) {
-    await storageSet({
-      [STORAGE_KEYS.processedMatches]: [...processedMatches, matchId].slice(-MAX_PROCESSED_MATCHES)
-    });
-    renderOverlay(currentStats, playerScore === opponentScore ? "Draw detected — no loss data added." : "Win detected — no loss data added.");
-    return true;
-  }
-
+  const outcome = playerScore === opponentScore ? "draw" : playerScore < opponentScore ? "loss" : "win";
   const opponentTable = playerTeam === "Team A" ? teamBTable : teamATable;
-  const heroEntries = extractHeroEntries(opponentTable);
+  const heroes = extractHeroEntries(opponentTable);
+  if (outcome !== "draw" && !heroes.length) return false;
 
-  if (!heroEntries.length) {
-    renderOverlay(currentStats, "Loss detected, but no opponent hero images were found.");
-    return true;
-  }
-
-  const nextStats = updateStats(currentStats, heroEntries);
-  const nextProcessed = [...processedMatches, matchId].slice(-MAX_PROCESSED_MATCHES);
-
-  await storageSet({
-    [STORAGE_KEYS.stats]: nextStats,
-    [STORAGE_KEYS.processedMatches]: nextProcessed
+  const result = await chrome.runtime.sendMessage({
+    type: "recordMatch",
+    match: { id: getMatchId(), player, outcome, playerScore, opponentScore, heroes }
   });
+  if (result.error) throw new Error(result.error);
 
-  renderOverlay(nextStats, `Loss recorded. Added ${heroEntries.length} opponent hero appearance${heroEntries.length === 1 ? "" : "s"}.`);
+  const latest = await chrome.storage.local.get(null);
+  renderOverlay(weightedStats(latest, player), result.duplicate
+    ? "This match was already processed." : `${outcome[0].toUpperCase() + outcome.slice(1)} recorded.`);
   return true;
 }
 
-function waitForMatchData() {
-  let attempts = 0;
-  const maxAttempts = 20;
-
-  const timer = window.setInterval(async () => {
-    attempts += 1;
-    const processed = await processMatch();
-
-    if (processed || attempts >= maxAttempts) {
-      window.clearInterval(timer);
+async function waitForMatchData() {
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    await new Promise((resolve) => window.setTimeout(resolve, 500));
+    try {
+      if (await processMatch()) return;
+    } catch (error) {
+      console.error("Marvel Rivals Stat Tracker could not record the match.", error);
+      renderOverlay({}, "Could not save the match. Reload the page to retry.");
+      return;
     }
-  }, 500);
+  }
 }
 
 waitForMatchData();

@@ -19,18 +19,40 @@
 
     <section>
       <div class="section-heading">
-        <h2>Top Threats</h2>
+        <h2>Observed loss rates</h2>
         <span id="matchCount"></span>
       </div>
-      <ol id="threatList"></ol>
+      <p id="matchupEmpty">Heroes appear here after five recorded encounters.</p>
+      <ol id="matchupList"></ol>
     </section>
+
+    <section>
+      <h2>Recently recorded matches</h2>
+      <p id="recentEmpty">New matches appear here in recording order.</p>
+      <ol id="recentMatches"></ol>
+    </section>
+
+    <details>
+      <summary>Weighted loss totals</summary>
+      <ol id="threatList"></ol>
+    </details>
+
+    <details id="legacyData" hidden>
+      <summary>Earlier unassigned totals</summary>
+      <p>Earlier versions stored totals without a player identity. Download them here for reference.</p>
+      <button id="exportLegacy" type="button">Export Earlier Totals</button>
+    </details>
 
     <div class="actions">
       <button id="exportJson" type="button">Export JSON</button>
       <button id="exportCsv" type="button">Export CSV</button>
+      <button id="exportMatches" type="button">Export Match History</button>
       <button id="clearData" class="danger" type="button">Clear Data</button>
     </div>
   </main>
+  <script src="ranking.js"></script>
+  <script src="match-data.js"></script>
+  <script src="matchup-view.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>

@@ -6,14 +6,6 @@ const STORAGE_KEYS = {
 
 const DEFAULT_PLAYER_NAME = "MrKilometer";
 
-function rankThreats(stats) {
-  return Object.entries(stats || {}).sort(([, a], [, b]) =>
-    b.weightedLosses - a.weightedLosses ||
-    b.losses - a.losses ||
-    b.appearances - a.appearances
-  );
-}
-
 function download(filename, text, type) {
   const blob = new Blob([text], { type });
   const url = URL.createObjectURL(blob);
@@ -47,9 +39,10 @@ function renderStats(stats, processedMatches) {
       const item = document.createElement("li");
       item.innerHTML = `
         <span class="rank">${index + 1}</span>
-        <span class="hero">${hero}</span>
+        <span class="hero"></span>
         <span class="score">${data.weightedLosses.toFixed(1)}</span>
       `;
+      item.querySelector(".hero").textContent = hero;
       list.appendChild(item);
     });
   }
@@ -57,34 +50,53 @@ function renderStats(stats, processedMatches) {
   document.getElementById("matchCount").textContent = `${processedMatches.length} matches seen`;
 }
 
-chrome.storage.local.get(Object.values(STORAGE_KEYS), (stored) => {
-  const stats = stored[STORAGE_KEYS.stats] || {};
-  const processedMatches = stored[STORAGE_KEYS.processedMatches] || [];
+async function refresh() {
+  const stored = await chrome.storage.local.get(null);
   const playerName = stored[STORAGE_KEYS.playerName] || DEFAULT_PLAYER_NAME;
+  const player = playerName.trim().toLowerCase();
+  const history = exportMatchHistory(stored, player);
+  const stats = weightedStats(stored, player);
+  renderStats(stats, history.matches);
+  const legacy = stored[STORAGE_KEYS.stats] || {};
+  document.getElementById("legacyData").hidden = Object.keys(legacy).length === 0;
+  document.getElementById("exportLegacy").onclick = () =>
+    download("marvel-rivals-legacy-totals.json", JSON.stringify(legacy, null, 2), "application/json");
 
-  document.getElementById("playerName").value = playerName;
-  renderStats(stats, processedMatches);
-
-  document.getElementById("savePlayer").addEventListener("click", () => {
-    const value = document.getElementById("playerName").value.trim();
-    if (!value) return;
-    chrome.storage.local.set({ [STORAGE_KEYS.playerName]: value }, () => {
-      document.getElementById("saveStatus").textContent = "Player name saved.";
-    });
-  });
-
-  document.getElementById("exportJson").addEventListener("click", () => {
+  renderMatchups(summarizeMatchups(stored, playerName));
+  renderRecentMatches(history.matches);
+  const matchExport = document.getElementById("exportMatches");
+  matchExport.disabled = history.matches.length === 0;
+  matchExport.onclick = () => download("marvel-rivals-match-history.json",
+    JSON.stringify(history, null, 2), "application/json");
+  document.getElementById("exportJson").onclick = () =>
     download("marvel-rivals-threats.json", JSON.stringify(stats, null, 2), "application/json");
-  });
-
-  document.getElementById("exportCsv").addEventListener("click", () => {
+  document.getElementById("exportCsv").onclick = () =>
     download("marvel-rivals-threats.csv", toCsv(stats), "text/csv");
-  });
+}
 
-  document.getElementById("clearData").addEventListener("click", () => {
+async function initialize() {
+  const nameInput = document.getElementById("playerName");
+  const status = document.getElementById("saveStatus");
+  const stored = await chrome.storage.local.get(STORAGE_KEYS.playerName);
+  nameInput.value = stored[STORAGE_KEYS.playerName] || DEFAULT_PLAYER_NAME;
+
+  document.getElementById("savePlayer").onclick = async () => {
+    const value = nameInput.value.trim();
+    if (!value) return;
+    await chrome.storage.local.set({ [STORAGE_KEYS.playerName]: value });
+    await refresh();
+    status.textContent = "Player name saved.";
+  };
+  document.getElementById("clearData").onclick = async () => {
     if (!confirm("Clear all tracked match data?")) return;
-    chrome.storage.local.remove([STORAGE_KEYS.stats, STORAGE_KEYS.processedMatches], () => {
-      renderStats({}, []);
-    });
-  });
-});
+    const result = await chrome.runtime.sendMessage({ type: "clearMatches" });
+    if (result.error) {
+      status.textContent = "Could not clear tracked data.";
+      return;
+    }
+    await refresh();
+  };
+  await refresh();
+}
+
+initialize();

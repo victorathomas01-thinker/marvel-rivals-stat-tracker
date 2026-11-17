@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Marvel Rivals Stat Tracker Demo</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <h1>Marvel Rivals Stat Tracker</h1>
+    <p id="datasetLabel">Synthetic match data</p>
+    <section>
+      <h2>Observed loss rates</h2>
+      <p id="matchupEmpty" hidden>Heroes appear here after five recorded encounters.</p>
+      <ol id="matchupList"></ol>
+    </section>
+    <section>
+      <h2>Recently recorded matches</h2>
+      <p id="recentEmpty">New matches appear here in recording order.</p>
+      <ol id="recentMatches"></ol>
+    </section>
+
+    <section>
+      <h2>Open an exported history</h2>
+      <label for="openHistory">Version 1 JSON export</label>
+      <input type="file" id="openHistory" accept=".json,application/json">
+      <p id="historyStatus" role="status"></p>
+    </section>
+  </main>
+  <script src="match-data.js"></script>
+  <script src="matchup-view.js"></script>
+  <script src="demo.js"></script>
+</body>
+</html>

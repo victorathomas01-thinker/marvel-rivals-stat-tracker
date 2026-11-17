@@ -113,3 +113,10 @@ li {
   grid-column: 1 / -1;
   border-color: #7a3d49;
 }
+
+#matchupList li, #recentMatches li { display: block; }
+
+#exportMatches { grid-column: 1 / -1; }
+
+details { margin-top: 14px; }
+summary { cursor: pointer; }
