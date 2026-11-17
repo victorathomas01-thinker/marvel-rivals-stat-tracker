@@ -102,7 +102,7 @@ The current parser was checked against saved Tracker.gg match-page fixtures repr
 The saved fixture pages are not included in the public repository because they contain third-party page markup and player/match data.
 
 
-The Chromium integration test loads the unpacked extension against a synthetic scoreboard fixture. It covers wins, losses, draws, deduplication, and the downloadable history. Install Playwright with `python -m pip install playwright==1.64.1`, then install Chromium with `python -m playwright install chromium` and run `python -B -m unittest discover -s tests -p test_extension.py`. The fixture exercises the documented selectors and contains no copied player or match data. Live compatibility still requires an accessible Tracker.gg scoreboard.
+The Chromium integration test loads the unpacked extension against a synthetic scoreboard fixture. It covers wins, losses, draws, deduplication, and the downloadable history. Install Playwright with `python -m pip install playwright==1.64.1`, then install Chromium with `python -m playwright install chromium` and run `python -B -m unittest discover -s tests -p test_extension.py`. The suite also uses two anonymized fixture layouts reconstructed from saved March 2025 Tracker.gg scoreboards. They retain the score and team structure, use substitute names and hero labels, and remove original links and unrelated page content. The archived layouts cover a win and a loss. Live compatibility still requires an accessible current Tracker.gg scoreboard.
 ## Engineering Decisions
 
 ### Narrow host permissions

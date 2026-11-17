@@ -35,6 +35,7 @@ class ExtensionTest(unittest.TestCase):
 
                 template = FIXTURE.read_text(encoding='utf-8')
                 cases = {'win': (2, 1), 'loss': (0, 2), 'draw': (1, 1)}
+                archived = {'archived-win': ('win', 1, 0), 'archived-loss': ('loss', 0, 2)}
                 browser.route('https://tracker.gg/**', lambda route: route.abort())
                 for outcome, (score_a, score_b) in cases.items():
                     url = ORIGIN + outcome
@@ -43,10 +44,17 @@ class ExtensionTest(unittest.TestCase):
                     page.goto(url)
                     page.get_by_text(f'{outcome.title()} recorded.', exact=True).wait_for()
 
+                for key, (outcome, _, _) in archived.items():
+                    url = ORIGIN + key
+                    html = (FIXTURE.parent / f'{key}.html').read_text(encoding='utf-8')
+                    browser.route(url, fixture_response(html))
+                    page.goto(url)
+                    page.get_by_text(f'{outcome.title()} recorded.', exact=True).wait_for()
+
                 page.reload()
                 page.get_by_text('This match was already processed.', exact=True).wait_for()
                 page.goto(popup)
-                page.get_by_text('3 matches seen', exact=True).wait_for()
+                page.get_by_text('5 matches seen', exact=True).wait_for()
                 with page.expect_download() as download:
                     page.get_by_role('button', name='Export Match History').click()
 
@@ -54,17 +62,24 @@ class ExtensionTest(unittest.TestCase):
                 export_file = download.value.path()
                 page.goto((ROOT / 'demo.html').as_uri())
                 page.locator('#openHistory').set_input_files(export_file)
-                page.get_by_text('Showing 3 matches from the local export.', exact=True).wait_for()
+                page.get_by_text('Showing 5 matches from the local export.', exact=True).wait_for()
                 self.assertEqual(page.locator('#recentMatches li').all_text_contents(), recent)
                 payload = json.loads(export_file.read_text(encoding='utf-8'))
                 self.assertEqual(payload['schemaVersion'], 1)
-                self.assertEqual(len(payload['matches']), 3)
-                actual = {match['outcome']: match for match in payload['matches']}
+                self.assertEqual(len(payload['matches']), 5)
+                actual = {match['id']: match for match in payload['matches']}
                 for outcome, score in cases.items():
                     match = actual[outcome]
                     self.assertEqual((match['playerScore'], match['opponentScore']), score)
                     self.assertEqual([hero['hero'] for hero in match['heroes']], ['Magneto', 'Luna Snow'])
                     self.assertTrue(all(hero['weight'] == 1.2 for hero in match['heroes']))
+                    self.assertNotIn('player', match)
+
+                for key, (outcome, player_score, opponent_score) in archived.items():
+                    match = actual[key]
+                    self.assertEqual(match['outcome'], outcome)
+                    self.assertEqual((match['playerScore'], match['opponentScore']), (player_score, opponent_score))
+                    self.assertEqual(len(match['heroes']), 6)
                     self.assertNotIn('player', match)
             finally:
                 browser.close()
