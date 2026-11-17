@@ -1,6 +1,23 @@
 # Marvel Rivals Stat Tracker
 
-A Chrome extension for analyzing personal **Marvel Rivals** match history on Tracker.gg and surfacing the enemy heroes that appear most often in losses.
+A Chrome extension that turns visited Tracker.gg match pages into personal matchup history and observed loss rates.
+
+**[Two-minute walkthrough](DEMO.md) · [Install the extension](#install-locally) · [Data and exports](#data-model)**
+
+| View | What it answers |
+| --- | --- |
+| Observed loss rates | How often did I lose when this hero appeared, with sample counts and 95% intervals? |
+| Recently recorded matches | Which matches did the extension capture most recently? |
+| Offline demo | Can I reproduce the displayed rates from an exported history? |
+| Weighted loss totals | Which heroes contributed most to the original weighted-loss summary? |
+
+**Try it.** Download this branch, open `demo.html`, and inspect the synthetic matchup view. Open a version 1 history export with the file picker to recompute its results locally. Follow the install steps below to capture visited match pages.
+
+**Engineering evidence.** Six unit tests and Chromium integration checks passed before this documentation update. Anonymized fixtures cover historical scoreboards and current supplied win/loss captures, including Team B appearing first and a player name without a profile link.
+
+**Measured behavior.** With 10,000 synthetic records in a temporary local Chromium profile, median storage reads measured 440 ms for all records and 2.5 ms for a keyed duplicate lookup. Popup readiness measured about 305 ms. The popup still reads history to compute analytics.
+
+**Interpretation.** Rates describe the matches you visited. Hero combinations, maps, opponents, and sample selection affect them. The popup displays heroes after five encounters.
 
 ## What It Does
 
