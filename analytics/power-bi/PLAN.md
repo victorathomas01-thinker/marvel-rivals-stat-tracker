@@ -3,8 +3,8 @@
 | Round | Scope | Acceptance |
 | --- | --- | --- |
 | 1 — complete | Desktop setup, synthetic export, metric contract | Dataset regenerates and loads through the existing export validator; Desktop installed and opened |
-| 2 — prepared | SQL and Power Query preparation | SQL tables reconcile with extension; typed Power Query adapter ready for native import verification in Round 3 |
-| 3 | Relationships and DAX | Filtered measures match the metric contract and extension |
+| 2 — complete | SQL and Power Query preparation | SQL tables reconcile with extension; typed Power Query adapter imported successfully in Desktop |
+| 3 — complete | Relationships and DAX | Six tables, three relationships, sixteen measures; native DAX acceptance query verifies totals, filters, and twelve heroes |
 | 4 | Accessible report pages | Overview, Matchups, and Data Quality work with readable labels and keyboard navigation |
 | 5 | Portfolio delivery | Local report, source project where supported, previews, and two-minute walkthrough |
 

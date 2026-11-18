@@ -1,0 +1,38 @@
+// Fixture-specific acceptance query. All Failures values must be zero.
+EVALUATE
+VAR Expected = DATATABLE("Hero", STRING, "N", INTEGER, "X", INTEGER,
+    {{"Groot",212,102},{"Hulk",200,102},{"Magneto",211,103},
+     {"Peni Parker",197,101},{"Rocket Raccoon",198,104},{"Thor",206,94},
+     {"Hela",188,90},{"Luna Snow",217,101},{"Venom",200,97},
+     {"Iron Man",206,97},{"Mantis",201,97},{"Storm",202,92}})
+VAR HeroChecks = GENERATE(Expected,
+    VAR hero = [Hero]
+    VAR n = [N]
+    VAR x = [X]
+    VAR p = DIVIDE(x,n)
+    VAR scale = 1 + 1.96*1.96/n
+    VAR center = (p + 1.96*1.96/(2*n))/scale
+    VAR margin = 1.96*SQRT(p*(1-p)/n + 1.96*1.96/(4*n*n))/scale
+    VAR actualN = CALCULATE([Hero Encounters], TREATAS({hero}, Heroes[Hero]))
+    VAR actualX = CALCULATE([Hero Losses], TREATAS({hero}, Heroes[Hero]))
+    VAR actualRate = CALCULATE([Hero Loss Rate], TREATAS({hero}, Heroes[Hero]))
+    VAR actualLow = CALCULATE([Wilson Lower], TREATAS({hero}, Heroes[Hero]))
+    VAR actualHigh = CALCULATE([Wilson Upper], TREATAS({hero}, Heroes[Hero]))
+    RETURN ROW("Passed", actualN=n && actualX=x && ABS(actualRate-p)<0.000000000001
+        && ABS(actualLow-MAX(0,center-margin))<0.000000000001
+        && ABS(actualHigh-MIN(1,center+margin))<0.000000000001))
+VAR Checks = UNION(
+    ROW("Check", "Outcome totals", "Passed", [Captured Matches]=360 && [Wins]=179 && [Losses]=169 && [Draws]=12 && [Decisive Matches]=348),
+    ROW("Check", "Data quality", "Passed", [Missing Recording Dates]=13 && [Missing Scores]=10 && [Repeated Appearances]=33 && [Rejected Rows]=0),
+    ROW("Check", "Physical tables", "Passed", COUNTROWS(Heroes)=12 && COUNTROWS(MatchHeroes)=2521 && COUNTROWS(RecordingDate)=91 && SUM(ImportSummary[SourceRows])=360 && SUM(ImportSummary[AcceptedRows])=360 && SUM(ImportSummary[RejectedRows])=0),
+    ROW("Check", "Hero-independent baseline", "Passed", ABS(CALCULATE([Overall Loss Rate], TREATAS({"Storm"}, Heroes[Hero]))-169/348)<0.000000000001),
+    ROW("Check", "Date filter and baseline", "Passed", CALCULATE([Captured Matches], TREATAS({"2026-08-03"}, RecordingDate[RecordingDateKey]))=4 && ABS(CALCULATE([Overall Loss Rate], TREATAS({"2026-08-03"}, RecordingDate[RecordingDateKey]), TREATAS({"Storm"}, Heroes[Hero]))-0.25)<0.000000000001),
+    ROW("Check", "Unknown date", "Passed", CALCULATE([Captured Matches], TREATAS({"Unknown"}, RecordingDate[RecordingDateKey]))=13),
+    ROW("Check", "Known date exclusion", "Passed", CALCULATE([Captured Matches], RecordingDate[IsUnknown]=0)=347),
+    ROW("Check", "Draw denominator", "Passed", CALCULATE([Hero Encounters], Matches[Outcome]="draw")=0 && ISBLANK(CALCULATE([Hero Loss Rate], Matches[Outcome]="draw"))),
+    ROW("Check", "Small sample bounds", "Passed", CALCULATE([Eligible Hero], Matches[MatchId]="synthetic-0001")=0 && ISBLANK(CALCULATE([Wilson Lower], Matches[MatchId]="synthetic-0001")) && ISBLANK(CALCULATE([Wilson Upper], Matches[MatchId]="synthetic-0001"))),
+    ROW("Check", "Empty date selection", "Passed", CALCULATE([Captured Matches], TREATAS({"1900-01-01"}, RecordingDate[RecordingDateKey]))=0 && ISBLANK(CALCULATE([Overall Loss Rate], TREATAS({"1900-01-01"}, RecordingDate[RecordingDateKey])))))
+RETURN UNION(
+    ROW("Suite", "Totals and filters", "Checks", COUNTROWS(Checks), "Failures", COALESCE(COUNTROWS(FILTER(Checks, NOT [Passed])), 0)),
+    ROW("Suite", "Heroes: counts/rate/bounds", "Checks", COUNTROWS(HeroChecks), "Failures", COALESCE(COUNTROWS(FILTER(HeroChecks, NOT [Passed])), 0)))
+

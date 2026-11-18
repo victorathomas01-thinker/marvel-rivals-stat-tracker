@@ -57,4 +57,24 @@ Create a blank query named `ModelTables`. Paste [ModelTables.pq](ModelTables.pq)
 = ModelTables[Matches]
 ```
 
-The adapter supplies explicit column names and types even for empty rejection or encounter tables. Refresh rereads the generated file; rerun the Python build first when the export changes. This adapter is authored but native Desktop import verification is pending Round 3. Relationships and DAX will be added in that round; report visuals and the native report file follow in Rounds 4–5.
+The adapter supplies explicit column names and types even for empty rejection or encounter tables. Refresh rereads the generated file; rerun the Python build first when the export changes. Native Desktop import is verified in Round 3.
+
+## Round 3: semantic model
+
+```sh
+python analytics/power-bi/build_semantic_model.py
+```
+
+In a **new, dedicated blank report**, open TMDL View, paste the generated `model.tmdl`, and select Apply, then Refresh now. This creates six imported tables, one shared Power Query expression, three relationships, and sixteen formatted DAX measures. The generated script embeds the absolute model path; regenerate it after moving the data. Keep generated scripts untracked. The script replaces its named objects, so do not apply it to an unrelated report or a report with custom measures on these tables.
+
+[Model generator and DAX definitions](build_semantic_model.py) are the canonical editable source. The script follows Microsoft's [TMDL workflow](https://learn.microsoft.com/en-us/power-bi/transform-model/desktop-tmdl-view).
+
+| One side | Many side | Direction |
+| --- | --- | --- |
+| RecordingDate.RecordingDateKey | Matches.RecordingDateKey | Date → Matches |
+| Matches.MatchId | MatchHeroes.MatchId | Matches → Encounters |
+| Heroes.Hero | MatchHeroes.Hero | Hero → Encounters |
+
+One-way relationships keep hero selection from shrinking the overall match baseline. Use **Heroes.Hero** for hero slicers and **RecordingDate.RecordingDateKey** for date selection including Unknown. Hero measures count distinct match IDs, so multi-select heroes describe the union of encounters. Their totals are not the sum of hero rows. Outcome and date filters intersect the selected context. Rejections and ImportSummary are disconnected import diagnostics; their counts describe the whole import, independent of report slicers.
+
+Run [validate_model.dax](validate_model.dax) in DAX Query View after refreshing the synthetic fixture. Both result rows must show zero failures: 10 total/filter checks and 12 per-hero checks (each verifies counts, rates, and both interval bounds). The query is fixture-specific and should not be used as an expected result for personal exports. Native Desktop execution passed both suites. Report pages and accessible visual formatting remain for Round 4.
