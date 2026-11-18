@@ -77,4 +77,9 @@ In a **new, dedicated blank report**, open TMDL View, paste the generated `model
 
 One-way relationships keep hero selection from shrinking the overall match baseline. Use **Heroes.Hero** for hero slicers and **RecordingDate.RecordingDateKey** for date selection including Unknown. Hero measures count distinct match IDs, so multi-select heroes describe the union of encounters. Their totals are not the sum of hero rows. Outcome and date filters intersect the selected context. Rejections and ImportSummary are disconnected import diagnostics; their counts describe the whole import, independent of report slicers.
 
-Run [validate_model.dax](validate_model.dax) in DAX Query View after refreshing the synthetic fixture. Both result rows must show zero failures: 10 total/filter checks and 12 per-hero checks (each verifies counts, rates, and both interval bounds). The query is fixture-specific and should not be used as an expected result for personal exports. Native Desktop execution passed both suites. Report pages and accessible visual formatting remain for Round 4.
+Run [validate_model.dax](validate_model.dax) in DAX Query View after refreshing the synthetic fixture. Both result rows must show zero failures: 10 total/filter checks and 12 per-hero checks (each verifies counts, rates, and both interval bounds). The query is fixture-specific and should not be used as an expected result for personal exports. Native Desktop execution passed both suites. Round 4 adds the native report pages described below.
+
+## Round 4: report pages
+
+[Report source and viewer guide](REPORT.md) describe the three native pages, the date/hero interactions, palette contrast, alternative text, tab order, and the remaining release checks. [build_report.py](build_report.py) generates the page definitions for a saved Desktop project. Overview, Matchups, and Data Quality have rendered successfully with the fixture; final delivery is scheduled for Round 5.
+
