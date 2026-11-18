@@ -1,0 +1,12 @@
+table Heroes
+	lineageTag: 6fd2092d-933d-48b6-9988-fcea2f1b1a07
+
+	column Hero
+		dataType: string
+		lineageTag: 0ce779e9-a71b-45a3-b3e9-64ce110a3f4a
+		summarizeBy: none
+		sourceColumn: Hero
+
+	partition Heroes = m
+		mode: import
+		source = ModelTables[Heroes]

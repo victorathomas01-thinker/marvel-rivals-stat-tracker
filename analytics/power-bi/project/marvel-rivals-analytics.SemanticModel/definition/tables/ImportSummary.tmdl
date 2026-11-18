@@ -1,0 +1,24 @@
+table ImportSummary
+	lineageTag: c31a31d2-fa8f-4edc-82d9-611364bc340b
+
+	column SourceRows
+		dataType: int64
+		lineageTag: 356437df-4464-4827-9ff0-ed952dbe40fd
+		summarizeBy: none
+		sourceColumn: SourceRows
+
+	column AcceptedRows
+		dataType: int64
+		lineageTag: dd075fac-57d9-4360-aa32-cdce8e6d90b8
+		summarizeBy: none
+		sourceColumn: AcceptedRows
+
+	column RejectedRows
+		dataType: int64
+		lineageTag: 812edc6c-c8ca-4ecc-b56a-aced96173f70
+		summarizeBy: none
+		sourceColumn: RejectedRows
+
+	partition ImportSummary = m
+		mode: import
+		source = ModelTables[ImportSummary]

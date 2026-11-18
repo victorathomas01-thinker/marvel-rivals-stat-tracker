@@ -21,6 +21,14 @@ A Chrome extension that turns visited Tracker.gg match pages into personal match
 
 **Interpretation.** Rates describe the matches you visited. Hero combinations, maps, opponents, and sample selection affect them. The popup displays heroes after five encounters.
 
+## Power BI case study
+
+[View the report and source](analytics/power-bi/README.md) · [Open the PBIX](analytics/power-bi/demo/marvel-rivals-analytics.pbix) · [Preview the PDF](analytics/power-bi/demo/marvel-rivals-analytics.pdf)
+
+The native Power BI case study connects extension-validated exports to SQL preparation, Power Query, a six-table import model, and DAX measures. Overview, Matchups, and Data Quality expose denominators, sample sizes, uncertainty, and missing data. The public demo uses seeded synthetic history.
+
+![Power BI matchup analytics overview](analytics/power-bi/demo/marvel-rivals-page-1.png)
+
 ## Release status
 
 This branch contains the extension release candidate and its offline demo.
@@ -64,6 +72,8 @@ Enemy heroes associated with an MVP or SVP row receive a **1.2× weighted-loss v
 - Chrome Storage API
 - DOM parsing / browser automation logic
 - CSV and JSON serialization
+
+The analytics companion adds Python, SQLite SQL, Power Query M, DAX, and versioned PBIR/TMDL report source, with a rebuildable local Power BI import model.
 
 ## How It Works
 

@@ -1,0 +1,24 @@
+table Rejections
+	lineageTag: 952b480e-b3c2-4800-950b-705b0e416fae
+
+	column SourceRow
+		dataType: int64
+		lineageTag: 3a0bb9bf-25ae-46dc-9458-d9f3d74c8a1c
+		summarizeBy: none
+		sourceColumn: SourceRow
+
+	column MatchId
+		dataType: string
+		lineageTag: 480e9456-1856-4733-aa5a-aa3dc214b813
+		summarizeBy: none
+		sourceColumn: MatchId
+
+	column Reason
+		dataType: string
+		lineageTag: e15ace0a-d297-4fdc-bb6e-5b9d7c4c6356
+		summarizeBy: none
+		sourceColumn: Reason
+
+	partition Rejections = m
+		mode: import
+		source = ModelTables[Rejections]
