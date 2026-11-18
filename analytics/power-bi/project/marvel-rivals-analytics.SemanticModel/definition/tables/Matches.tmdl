@@ -1,0 +1,120 @@
+table Matches
+	lineageTag: 7281adaf-08d1-4c49-9e52-672bc9d49e7b
+
+	measure 'Captured Matches' = COALESCE(COUNTROWS(Matches), 0)
+		formatString: #,##0
+		lineageTag: cc688f9a-90c9-46f6-8d25-004f632bc394
+
+	measure Wins = CALCULATE([Captured Matches], KEEPFILTERS(Matches[Outcome] = "win"))
+		formatString: #,##0
+		lineageTag: 599b1e3c-4997-4fd4-a963-3af4fd7716db
+
+	measure Losses = CALCULATE([Captured Matches], KEEPFILTERS(Matches[Outcome] = "loss"))
+		formatString: #,##0
+		lineageTag: 986cd810-21ed-4aa0-aebd-27f93c037abe
+
+	measure Draws = CALCULATE([Captured Matches], KEEPFILTERS(Matches[Outcome] = "draw"))
+		formatString: #,##0
+		lineageTag: f73def60-ac0b-4cd0-bced-422be60bbe42
+
+	measure 'Decisive Matches' = [Wins] + [Losses]
+		formatString: #,##0
+		lineageTag: 636a1c26-1313-4404-82a6-8c90c529cb5c
+
+	measure 'Overall Loss Rate' = CALCULATE(DIVIDE([Losses], [Decisive Matches]), REMOVEFILTERS(Heroes))
+		formatString: 0.0%
+		lineageTag: c3e074fd-1b98-4d7f-b8e4-e6a359824627
+
+	measure 'Hero Encounters' = COALESCE(CALCULATE(DISTINCTCOUNT(MatchHeroes[MatchId]), KEEPFILTERS(Matches[Outcome] IN {"win", "loss"})), 0)
+		formatString: #,##0
+		lineageTag: 18707297-7293-4941-8b85-ffd077090f30
+
+	measure 'Hero Losses' = COALESCE(CALCULATE(DISTINCTCOUNT(MatchHeroes[MatchId]), KEEPFILTERS(Matches[Outcome] = "loss")), 0)
+		formatString: #,##0
+		lineageTag: 82ca867b-5981-422a-9d20-68daf5186d7d
+
+	measure 'Hero Loss Rate' = DIVIDE([Hero Losses], [Hero Encounters])
+		formatString: 0.0%
+		lineageTag: 8fdce4b2-6bfe-400f-abd6-6ad023face2a
+
+	measure 'Eligible Hero' = IF([Hero Encounters] >= 5, 1, 0)
+		formatString: #,##0
+		lineageTag: 64a4050d-9ad4-4a66-a504-37380c748b3e
+
+	measure 'Repeated Appearances' = COALESCE(SUM(MatchHeroes[AppearanceCount]), 0) - COALESCE(COUNTROWS(MatchHeroes), 0)
+		formatString: #,##0
+		lineageTag: 603467c0-bc92-46cf-ab69-b7a89c9f99f3
+
+	measure 'Missing Recording Dates' = CALCULATE([Captured Matches], KEEPFILTERS(ISBLANK(Matches[RecordedAt])))
+		formatString: #,##0
+		lineageTag: 42f0dab4-80d2-4f64-97ab-55c1d59a6ab5
+
+	measure 'Missing Scores' = CALCULATE([Captured Matches], KEEPFILTERS(ISBLANK(Matches[PlayerScore]) || ISBLANK(Matches[OpponentScore])))
+		formatString: #,##0
+		lineageTag: 8f194785-8196-4fc9-96e9-b7b2445b3241
+
+	measure 'Rejected Rows' = COALESCE(COUNTROWS(Rejections), 0)
+		formatString: #,##0
+		lineageTag: b798a320-4820-44dd-863c-9dc7bcf2e441
+
+	measure 'Wilson Lower' =
+			VAR n = [Hero Encounters]
+			VAR p = [Hero Loss Rate]
+			VAR z = 1.96
+			VAR scale = 1 + DIVIDE(z*z, n)
+			VAR center = DIVIDE(p + DIVIDE(z*z, 2*n), scale)
+			VAR margin = DIVIDE(z * SQRT(DIVIDE(p*(1-p), n) + DIVIDE(z*z, 4*n*n)), scale)
+			RETURN IF(n >= 5, MAX(0, center - margin))
+		formatString: 0.0%
+		lineageTag: 0bcc677b-d615-44c3-bd0e-655e9634a6ed
+
+	measure 'Wilson Upper' =
+			VAR n = [Hero Encounters]
+			VAR p = [Hero Loss Rate]
+			VAR z = 1.96
+			VAR scale = 1 + DIVIDE(z*z, n)
+			VAR center = DIVIDE(p + DIVIDE(z*z, 2*n), scale)
+			VAR margin = DIVIDE(z * SQRT(DIVIDE(p*(1-p), n) + DIVIDE(z*z, 4*n*n)), scale)
+			RETURN IF(n >= 5, MIN(1, center + margin))
+		formatString: 0.0%
+		lineageTag: 44b3fb85-0f3d-4c41-8f6f-29fafd2baadf
+
+	column MatchId
+		dataType: string
+		lineageTag: 03aa086f-a09d-4d9e-b6c3-39597b0b8753
+		summarizeBy: none
+		sourceColumn: MatchId
+
+	column Outcome
+		dataType: string
+		lineageTag: 57517cd4-20f6-4e8d-a62a-5cec7adc5d31
+		summarizeBy: none
+		sourceColumn: Outcome
+
+	column RecordedAt
+		dataType: dateTime
+		lineageTag: 9d0e7839-336c-49ce-8774-83c882986b85
+		summarizeBy: none
+		sourceColumn: RecordedAt
+
+	column RecordingDateKey
+		dataType: string
+		lineageTag: 9c43928b-49eb-450c-9672-918f74ff35c3
+		summarizeBy: none
+		sourceColumn: RecordingDateKey
+
+	column PlayerScore
+		dataType: int64
+		lineageTag: 5e22beec-554b-4ae4-b093-a53d5db99a43
+		summarizeBy: none
+		sourceColumn: PlayerScore
+
+	column OpponentScore
+		dataType: int64
+		lineageTag: 8108a9de-81d4-4966-b27c-07323e3ee1c9
+		summarizeBy: none
+		sourceColumn: OpponentScore
+
+	partition Matches = m
+		mode: import
+		source = ModelTables[Matches]

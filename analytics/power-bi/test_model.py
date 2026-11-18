@@ -8,6 +8,7 @@ import tempfile
 import unittest
 
 from build_model import ROOT, build
+from prepare_project import prepare
 
 
 class ModelChecks(unittest.TestCase):
@@ -80,6 +81,28 @@ console.log(JSON.stringify(context.rankMatchups(context.readHistory(
         source.write_text(json.dumps({'schemaVersion': 2, 'matches': rows}), encoding='utf-8')
         with self.assertRaises(subprocess.CalledProcessError):
             build(source, self.destination / 'unsupported')
+
+    def test_project_can_be_prepared_in_a_new_location(self):
+        destination = self.destination / 'relocated project'
+        project = prepare(destination, self.source)
+        self.assertTrue(project.is_file())
+        expression = (destination / 'marvel-rivals-analytics.SemanticModel/definition/expressions.tmdl').read_text(encoding='utf-8')
+        self.assertIn(str(destination.resolve() / 'data/model.json'), expression)
+        self.assertNotIn('__MODEL_JSON__', expression)
+        model = json.loads((destination / 'data/model.json').read_text(encoding='utf-8'))
+        self.assertEqual(len(model['Matches']), 360)
+        pages = destination / 'marvel-rivals-analytics.Report/definition/pages'
+        order = json.loads((pages / 'pages.json').read_text(encoding='utf-8'))
+        self.assertEqual(len(order['pageOrder']), 3)
+        first = json.loads((pages / order['activePageName'] / 'page.json').read_text(encoding='utf-8'))
+        self.assertEqual(first['displayName'], 'Overview')
+        self.assertFalse(list(destination.rglob('.pbi')))
+        protected = self.destination / 'customized report'
+        protected.mkdir()
+        (protected / 'important.txt').write_text('Keep my edits', encoding='utf-8')
+        with self.assertRaises(ValueError):
+            prepare(protected, self.source)
+        self.assertEqual((protected / 'important.txt').read_text(encoding='utf-8'), 'Keep my edits')
 
 
 if __name__ == '__main__':

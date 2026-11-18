@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","DaxQueryView_Desktop","DevMode"]
+
+annotation PBI_QueryOrder = ["Matches","Heroes","MatchHeroes","RecordingDate","Rejections","ImportSummary","ModelTables"]
+
+ref table Matches
+ref table Heroes
+ref table MatchHeroes
+ref table RecordingDate
+ref table Rejections
+ref table ImportSummary
+ref table DateTableTemplate_663d8ead-78ce-42af-86a4-0d6c1c83a21f
+ref table LocalDateTable_7e9ff068-c598-4e8b-8c5e-44732869f903
+
+ref cultureInfo en-US

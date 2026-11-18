@@ -1,0 +1,24 @@
+table MatchHeroes
+	lineageTag: caa8b259-a422-41ed-8592-4165d5e8fd0c
+
+	column MatchId
+		dataType: string
+		lineageTag: 3b8829d7-5807-4639-a141-e3415b57e3d4
+		summarizeBy: none
+		sourceColumn: MatchId
+
+	column Hero
+		dataType: string
+		lineageTag: d7de36e0-176d-4790-a7cd-e43066df6688
+		summarizeBy: none
+		sourceColumn: Hero
+
+	column AppearanceCount
+		dataType: int64
+		lineageTag: 97793b03-9c9e-43d7-9792-ac029777782d
+		summarizeBy: none
+		sourceColumn: AppearanceCount
+
+	partition MatchHeroes = m
+		mode: import
+		source = ModelTables[MatchHeroes]

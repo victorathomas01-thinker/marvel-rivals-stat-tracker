@@ -20,6 +20,12 @@ jobs:
       - run: python -m playwright install --with-deps chromium
       - run: python -B -m unittest discover -s tests -p test_extension.py
       - run: python scripts/package_extension.py dist/marvel-rivals-stat-tracker.zip
+      - run: python analytics/power-bi/package_case_study.py dist/marvel-rivals-power-bi.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: marvel-rivals-power-bi-demo
+          path: dist/marvel-rivals-power-bi.zip
+          if-no-files-found: error
       - uses: actions/upload-artifact@v4
         with:
           name: marvel-rivals-stat-tracker-extension

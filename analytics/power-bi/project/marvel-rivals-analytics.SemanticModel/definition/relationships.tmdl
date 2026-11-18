@@ -1,0 +1,16 @@
+relationship MatchDate
+	fromColumn: Matches.RecordingDateKey
+	toColumn: RecordingDate.RecordingDateKey
+
+relationship EncounterMatch
+	fromColumn: MatchHeroes.MatchId
+	toColumn: Matches.MatchId
+
+relationship EncounterHero
+	fromColumn: MatchHeroes.Hero
+	toColumn: Heroes.Hero
+
+relationship b8a2cef0-f2d9-4dc1-a5ac-006c899b8749
+	joinOnDateBehavior: datePartOnly
+	fromColumn: RecordingDate.RecordingDate
+	toColumn: LocalDateTable_7e9ff068-c598-4e8b-8c5e-44732869f903.Date

@@ -1,2 +1,6 @@
 generated/
 __pycache__/
+project/**/.pbi/
+project/**/TMDLScripts/
+project/**/DAXQueries/
+project/**/.platform

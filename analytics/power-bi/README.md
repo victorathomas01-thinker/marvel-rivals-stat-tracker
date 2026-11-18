@@ -2,6 +2,24 @@
 
 This case study follows the browser extension's version 1 history export from raw records to a report with traceable metrics. The initial dataset contains 360 synthetic matches generated with seed 20261117. Outcomes are generated independently of heroes. Apparent matchup patterns are simulated.
 
+**[Open the PBIX demo](demo/marvel-rivals-analytics.pbix) · [View PDF previews](demo/marvel-rivals-analytics.pdf) · [Two-minute walkthrough](WALKTHROUGH.md) · [Report source](project/README.md)**
+
+![Power BI Overview with captured matches, loss-rate baseline, and labeled outcomes](demo/marvel-rivals-page-1.png)
+
+## View or rebuild
+
+Download the PBIX using GitHub's raw/download button and open it in Power BI Desktop. It contains the imported synthetic snapshot and three report pages. Local viewing does not require a service account. The PDF and PNGs let viewers inspect the report without installing Desktop; the PDF is a visual companion exported without document accessibility tags.
+
+For an editable project that can refresh on your computer, run this from the repository root:
+
+```sh
+python analytics/power-bi/prepare_project.py
+```
+
+This requires Python 3.12+ and Node.js 22+. Open the printed `generated/project/marvel-rivals-analytics.pbip` path in Desktop and choose Refresh. The script binds a local model path and avoids machine-specific paths in the tracked template. Rerunning preparation replaces template files, so save custom report edits elsewhere. Use `--source PATH --output DIRECTORY` for a separate export. Keep personal exports and prepared models untracked.
+
+The snapshot's original source path is local to its authoring computer; use the prepared project for refresh instead of refreshing the downloaded PBIX. Package both viewing artifacts and source with `python analytics/power-bi/package_case_study.py dist/marvel-rivals-power-bi.zip`.
+
 ## Questions
 
 - How many captured matches were wins, losses, or draws?
@@ -15,7 +33,7 @@ Run `python analytics/power-bi/generate_fixture.py` from the repository root to 
 
 [Metric definitions](METRICS.md) explain the grain, denominator, and exclusions. [Development rounds](PLAN.md) describe the next deliverables.
 
-## Planned report
+## Report pages
 
 | Page | Viewer question |
 | --- | --- |
@@ -81,5 +99,15 @@ Run [validate_model.dax](validate_model.dax) in DAX Query View after refreshing 
 
 ## Round 4: report pages
 
-[Report source and viewer guide](REPORT.md) describe the three native pages, the date/hero interactions, palette contrast, alternative text, tab order, and the remaining release checks. [build_report.py](build_report.py) generates the page definitions for a saved Desktop project. Overview, Matchups, and Data Quality have rendered successfully with the fixture; final delivery is scheduled for Round 5.
+[Report source and viewer guide](REPORT.md) describe the three native pages, date/hero interactions, palette contrast, alternative text, tab order, and accessibility limits. [build_report.py](build_report.py) generates the page definitions for a saved Desktop project. Overview, Matchups, and Data Quality have rendered successfully with the fixture.
+
+## Round 5: portfolio delivery
+
+The `demo` folder contains the native PBIX snapshot, a three-page PDF, and PNG previews exported from the report. [WALKTHROUGH.md](WALKTHROUGH.md) provides the two-minute demo. [project](project/README.md) contains editable PBIR/TMDL source. The preparation test verifies that the template rebuilds in a new folder, binds its data path, lands on Overview, and protects unrelated report folders. The rebuilt project also opened and refreshed in Desktop without a preexisting cache, then passed the same 22 native DAX checks with zero failures. The case-study ZIP is produced as a GitHub Actions artifact.
+
+## Native previews
+
+![Matchups page with sample counts, rates, and Wilson confidence bounds](demo/marvel-rivals-page-2.png)
+
+![Data Quality page with missing-data counts, repeated appearances, and interpretation limits](demo/marvel-rivals-page-3.png)
 

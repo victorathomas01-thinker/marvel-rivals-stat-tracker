@@ -1,0 +1,5652 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "4.1.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "match": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "match": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "competition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "bout": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "contest": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "tie": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "counterpart": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "equivalent": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "balance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "pair": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "partner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "match.match_id": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "MatchId"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "match id": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "id": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "MatchId": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "match identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "match identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "match identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "match credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ],
+			      "NameType": "Identifier"
+			    },
+			    "match.outcome": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Outcome"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "outcome": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "consequence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "product": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "conclusion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "upshot": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "aftermath": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "sequel": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "aftereffect": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "result": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "effect": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "after-effect": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "match.recorded_at": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "RecordedAt"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "recorded at": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "RecordedAt": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "match.recording_date_key": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "RecordingDateKey"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "recording date key": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "RecordingDateKey": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "date key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "recording moment key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "moment key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "recording period key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "period key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "recording date solution": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording date explanation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording date basis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording date recipe": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording date interpretation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording date resolution": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        }
+			      ]
+			    },
+			    "match.player_score": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "PlayerScore"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "player score": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "PlayerScore": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "player notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "player slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "player groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "player nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "player cut": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "player mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "match.opponent_score": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "OpponentScore"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "opponent score": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "OpponentScore": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "score": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "opponent notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "opponent slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "opponent groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "opponent nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "opponent cut": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "opponent mark": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "match.captured_matches": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Captured Matches"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "captured matches": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "matches": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "captured competition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "captured bout": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "competition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "bout": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "captured game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "captured contest": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "captured tie": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "contest": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "tie": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "match.wins": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Wins"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "wins": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "success": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "landslide": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "conquest": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "victory": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "triumph": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "match.losses": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Losses"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "losses": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "fatality": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "victim": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "sufferer": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "wounded": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "dead": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "injury": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "forfeiture": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "damage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "harm": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "cost": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "match.draws": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Draws"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "draws": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "attraction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "magnet": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "inducement": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "enticement": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "allurement": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "lure": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "pull": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "appeal": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "tie": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "stalemate": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "match.decisive_matches": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Decisive Matches"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "decisive matches": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "matches": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "decisive competition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "decisive bout": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "competition": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "bout": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "decisive game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "decisive contest": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "decisive tie": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "game": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "contest": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "tie": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "match.overall_loss_rate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Overall Loss Rate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "overall loss rate": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "rate": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "loss rate": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "overall loss degree": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "overall loss frequency": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "overall loss percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "overall loss ratio": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "overall loss quotient": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "loss degree": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "loss frequency": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "loss percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "loss ratio": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "loss quotient": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        }
+			      ]
+			    },
+			    "match.hero_encounters": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Hero Encounters"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "hero encounters": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "encounters": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "hero happenstance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "happenstance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "hero meeting": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "meeting": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "match.hero_losses": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Hero Losses"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "hero losses": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "hero fatality": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "hero victim": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "hero sufferer": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "hero wounded": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "hero dead": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "hero injury": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "hero forfeiture": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "hero damage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "hero harm": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "hero cost": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "Losses": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "match.hero_loss_rate": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Hero Loss Rate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "hero loss rate": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "rate": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "loss rate": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "hero loss degree": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "hero loss frequency": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "hero loss percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "hero loss ratio": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "hero loss quotient": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.508
+			          }
+			        },
+			        {
+			          "loss degree": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "loss frequency": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "loss percentage": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "loss ratio": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "loss quotient": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        }
+			      ]
+			    },
+			    "match.eligible_hero": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Eligible Hero"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "eligible hero": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "eligible superman": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "eligible conqueror": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "eligible idol": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "eligible champion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "eligible protagonist": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "eligible star": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "eligible lead": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        }
+			      ]
+			    },
+			    "match.repeated_appearances": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Repeated Appearances"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "repeated appearances": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "appearances": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "repeated arrival": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "repeated advent": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "repeated attendance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "repeated presence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "arrival": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "advent": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "attendance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "presence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "repeated entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "entrance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "match.missing_recording_dates": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Missing Recording Dates"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "missing recording dates": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "recording dates": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "missing recording eras": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "missing recording epoch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording eras": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "recording epoch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "missing recording age": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "missing recording period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.468
+			          }
+			        },
+			        {
+			          "recording age": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "recording period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "missing recording appointment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.458
+			          }
+			        },
+			        {
+			          "missing recording engagement": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.458
+			          }
+			        }
+			      ]
+			    },
+			    "match.missing_scores": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Missing Scores"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "missing scores": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "scores": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "missing notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "missing slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "missing groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "missing nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "missing cut": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "missing marks": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "notch": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "slash": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "groove": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "nick": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "match.rejected_rows": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Rejected Rows"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "rejected rows": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "rows": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "rejected ruckus": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "rejected commotion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "rejected rumpus": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "rejected disturbance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "ruckus": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "commotion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "rumpus": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "disturbance": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "rejected noise": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "rejected racket": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        }
+			      ]
+			    },
+			    "match.wilson_lower": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Wilson Lower"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "wilson lower": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "95% lower": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "match.wilson_upper": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Matches",
+			          "ConceptualProperty": "Wilson Upper"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "wilson upper": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "upper": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "better": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "superior": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "95% upper": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "hero": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Heroes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "hero": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "superman": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "conqueror": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "idol": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "champion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "protagonist": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "star": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "lead": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "hero.hero": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Heroes",
+			          "ConceptualProperty": "Hero"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "hero": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "hero name": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "superman": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "conqueror": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "idol": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "champion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "protagonist": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "star": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "lead": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ],
+			      "NameType": "Name"
+			    },
+			    "match_hero": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MatchHeroes"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "match hero": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "MatchHeroes": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "match superman": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "match conqueror": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "match idol": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.5
+			          }
+			        },
+			        {
+			          "match champion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.485
+			          }
+			        },
+			        {
+			          "match protagonist": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.475
+			          }
+			        },
+			        {
+			          "match star": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        },
+			        {
+			          "match lead": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.461
+			          }
+			        }
+			      ]
+			    },
+			    "match_hero.match_id": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MatchHeroes",
+			          "ConceptualProperty": "MatchId"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "match id": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "MatchId": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "match identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "match identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "match identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "match credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "match_hero.hero": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MatchHeroes",
+			          "ConceptualProperty": "Hero"
+			        }
+			      },
+			      "State": "Generated",
+			      "Visibility": {
+			        "Value": "Hidden"
+			      },
+			      "Terms": [
+			        {
+			          "hero": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "superman": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "conqueror": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "idol": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "champion": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "protagonist": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        },
+			        {
+			          "star": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "lead": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        }
+			      ]
+			    },
+			    "match_hero.appearance_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "MatchHeroes",
+			          "ConceptualProperty": "AppearanceCount"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "appearance count": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "AppearanceCount": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "appearance amount": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "recording_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "RecordingDate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "recording date": {
+			            "State": "Generated",
+			            "Weight": 0.87
+			          }
+			        },
+			        {
+			          "RecordingDate": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.8613
+			          }
+			        },
+			        {
+			          "recording moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "recording period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "recording_date.recording_date_key": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "RecordingDate",
+			          "ConceptualProperty": "RecordingDateKey"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "recording date key": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "RecordingDateKey": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "date key": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "recording moment key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "moment key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "recording period key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "period key": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        },
+			        {
+			          "recording date solution": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording date explanation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording date basis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording date recipe": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording date interpretation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        },
+			        {
+			          "recording date resolution": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.482
+			          }
+			        }
+			      ]
+			    },
+			    "recording_date.recording_date": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "RecordingDate",
+			          "ConceptualProperty": "RecordingDate"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "recording date": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "RecordingDate": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "date": {
+			            "State": "Generated",
+			            "Weight": 0.7
+			          }
+			        },
+			        {
+			          "recording moment": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "recording period": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "recording_date.recording_date.date_hierarchy": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "RecordingDate",
+			          "VariationSource": "RecordingDate",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "recording date hierarchy": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date hierarchy": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "recording_date.recording_date.year": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "RecordingDate",
+			          "VariationSource": "RecordingDate",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Year"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "recording year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "recording date year": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date year": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "recording date yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "recording yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "date yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "yr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "recording moment year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "moment year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "recording period year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "period year": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "recording_date.recording_date.quarter": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "RecordingDate",
+			          "VariationSource": "RecordingDate",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Quarter"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "recording quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "recording date quarter": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date quarter": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "recording date qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.846
+			          }
+			        },
+			        {
+			          "recording qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.833
+			          }
+			        },
+			        {
+			          "date qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.833
+			          }
+			        },
+			        {
+			          "qtr": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.818
+			          }
+			        },
+			        {
+			          "recording moment quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "moment quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "recording period quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "period quarter": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "recording_date.recording_date.month": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "RecordingDate",
+			          "VariationSource": "RecordingDate",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Month"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "recording month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "recording date month": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date month": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "recording date mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.762
+			          }
+			        },
+			        {
+			          "recording mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "date mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "mth": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "recording moment month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "moment month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "recording period month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "period month": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "recording_date.recording_date.day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "RecordingDate",
+			          "VariationSource": "RecordingDate",
+			          "VariationSet": "Variation",
+			          "Hierarchy": "Date Hierarchy",
+			          "HierarchyLevel": "Day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "recording day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "recording date day": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "date day": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "recording moment day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.609
+			          }
+			        },
+			        {
+			          "moment day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.6
+			          }
+			        },
+			        {
+			          "recording period day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.591
+			          }
+			        },
+			        {
+			          "period day": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.582
+			          }
+			        }
+			      ],
+			      "SemanticType": "Time"
+			    },
+			    "recording_date.is_unknown": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "RecordingDate",
+			          "ConceptualProperty": "IsUnknown"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "is unknown": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "IsUnknown": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "unknown": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "indefinite": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "alien": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "virgin": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.452
+			          }
+			        },
+			        {
+			          "is nonentity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.451
+			          }
+			        },
+			        {
+			          "is newcomer": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.451
+			          }
+			        },
+			        {
+			          "is beginner": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.451
+			          }
+			        }
+			      ]
+			    },
+			    "rejection": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Rejections"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "rejection": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "refusal": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "denial": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "denunciation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "refutation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "dismissal": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "elimination": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "rebuff": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "negative": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        }
+			      ]
+			    },
+			    "rejection.source_row": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Rejections",
+			          "ConceptualProperty": "SourceRow"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "source row": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "SourceRow": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "row": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "source line": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "rejection.match_id": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Rejections",
+			          "ConceptualProperty": "MatchId"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "match id": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "MatchId": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "match identification": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "match identity": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "match identifier": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "match credential": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "rejection.reason": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "Rejections",
+			          "ConceptualProperty": "Reason"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "reason": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "motivation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "intention": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.491
+			          }
+			        },
+			        {
+			          "aim": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "motive": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "cause": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "goal": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "purpose": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "object": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "end": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.476
+			          }
+			        },
+			        {
+			          "intelligence": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.466
+			          }
+			        }
+			      ]
+			    },
+			    "import_summary": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ImportSummary"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "import summary": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "ImportSummary": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "summary": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "import synopsis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "import explanation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "import extraction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "import summarisation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.75
+			          }
+			        },
+			        {
+			          "synopsis": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "explanation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "extraction": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "summarisation": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.736
+			          }
+			        },
+			        {
+			          "import review": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        },
+			        {
+			          "import abstract": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "import_summary.source_row": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ImportSummary",
+			          "ConceptualProperty": "SourceRows"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "source row": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "SourceRows": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "row": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "source line": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "import_summary.accepted_row": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ImportSummary",
+			          "ConceptualProperty": "AcceptedRows"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "accepted row": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "AcceptedRows": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "row": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "accepted line": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    },
+			    "import_summary.rejected_row": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "ImportSummary",
+			          "ConceptualProperty": "RejectedRows"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "rejected row": {
+			            "State": "Generated"
+			          }
+			        },
+			        {
+			          "RejectedRows": {
+			            "Type": "Noun",
+			            "State": "Generated",
+			            "Weight": 0.99
+			          }
+			        },
+			        {
+			          "row": {
+			            "State": "Generated",
+			            "Weight": 0.97
+			          }
+			        },
+			        {
+			          "rejected line": {
+			            "Type": "Noun",
+			            "State": "Suggested",
+			            "Source": {
+			              "Agent": "Thesaurus"
+			            },
+			            "Weight": 0.727
+			          }
+			        }
+			      ]
+			    }
+			  },
+			  "Relationships": {
+			    "match_is_named_match_id": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.match_id": {
+			          "Target": {
+			            "Entity": "match.match_id"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Name": {
+			              "Role": "match.match_id"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_ids_are_names_IDs_of_matches"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.match_id"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_match_ids"
+			        }
+			      ]
+			    },
+			    "hero_is_named_hero": {
+			      "Binding": {
+			        "ConceptualEntity": "Heroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "hero": {
+			          "Target": {
+			            "Entity": "hero"
+			          }
+			        },
+			        "hero.hero": {
+			          "Target": {
+			            "Entity": "hero.hero"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Name": {
+			            "Subject": {
+			              "Role": "hero"
+			            },
+			            "Name": {
+			              "Role": "hero.hero"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "heroes_are_names_IDs_of_heroes"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "hero"
+			            },
+			            "Object": {
+			              "Role": "hero.hero"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "heroes_have_heroes"
+			        }
+			      ]
+			    },
+			    "recording_date_is_unknown": {
+			      "Binding": {
+			        "ConceptualEntity": "RecordingDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "recording_date": {
+			          "Target": {
+			            "Entity": "recording_date"
+			          }
+			        },
+			        "recording_date.is_unknown": {
+			          "Target": {
+			            "Entity": "recording_date.is_unknown"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Adjective": {
+			            "Subject": {
+			              "Role": "recording_date"
+			            },
+			            "Adjectives": [
+			              {
+			                "unknown": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Measurement": {
+			              "Role": "recording_date.is_unknown"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "is_unknown_indicates_how_unknown_recording_dates_are"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "recording_date"
+			            },
+			            "Object": {
+			              "Role": "recording_date.is_unknown"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "recording_dates_have_is_unknowns"
+			        }
+			      ]
+			    },
+			    "match_is_recorded_on_recorded_at": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.recorded_at": {
+			          "Target": {
+			            "Entity": "match.recorded_at"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "When": {
+			          "Role": "match.recorded_at"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Verb": {
+			            "Verbs": [
+			              {
+			                "record": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "match"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.9,
+			          "ID": "matches_are_recorded_on_recorded_at"
+			        }
+			      ]
+			    },
+			    "recording_date_is_recorded_on_recording_date": {
+			      "Binding": {
+			        "ConceptualEntity": "RecordingDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "recording_date": {
+			          "Target": {
+			            "Entity": "recording_date"
+			          }
+			        },
+			        "recording_date.recording_date": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date"
+			          }
+			        }
+			      },
+			      "SemanticSlots": {
+			        "When": {
+			          "Role": "recording_date.recording_date"
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Verb": {
+			            "Verbs": [
+			              {
+			                "record": {
+			                  "State": "Generated"
+			                }
+			              }
+			            ],
+			            "Object": {
+			              "Role": "recording_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.9,
+			          "ID": "recording_dates_are_recorded_on_recording_dates"
+			        }
+			      ]
+			    },
+			    "match_has_outcome": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.outcome": {
+			          "Target": {
+			            "Entity": "match.outcome"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.outcome"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_outcomes"
+			        }
+			      ]
+			    },
+			    "match_has_recorded_at": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.recorded_at": {
+			          "Target": {
+			            "Entity": "match.recorded_at"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.recorded_at"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_recorded_at"
+			        }
+			      ]
+			    },
+			    "match_has_player_score": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.player_score": {
+			          "Target": {
+			            "Entity": "match.player_score"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.player_score"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_player_scores"
+			        }
+			      ]
+			    },
+			    "match_has_opponent_score": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.opponent_score": {
+			          "Target": {
+			            "Entity": "match.opponent_score"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.opponent_score"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_opponent_scores"
+			        }
+			      ]
+			    },
+			    "match_has_captured_matches": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.captured_matches": {
+			          "Target": {
+			            "Entity": "match.captured_matches"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.captured_matches"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_captured_matches"
+			        }
+			      ]
+			    },
+			    "match_has_wins": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.wins": {
+			          "Target": {
+			            "Entity": "match.wins"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.wins"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_wins"
+			        }
+			      ]
+			    },
+			    "match_has_losses": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.losses": {
+			          "Target": {
+			            "Entity": "match.losses"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.losses"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_losses"
+			        }
+			      ]
+			    },
+			    "match_has_draws": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.draws": {
+			          "Target": {
+			            "Entity": "match.draws"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.draws"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_draws"
+			        }
+			      ]
+			    },
+			    "match_has_decisive_matches": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.decisive_matches": {
+			          "Target": {
+			            "Entity": "match.decisive_matches"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.decisive_matches"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_decisive_matches"
+			        }
+			      ]
+			    },
+			    "match_has_overall_loss_rate": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.overall_loss_rate": {
+			          "Target": {
+			            "Entity": "match.overall_loss_rate"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.overall_loss_rate"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_overall_loss_rate"
+			        }
+			      ]
+			    },
+			    "match_hero_has_match_hero_encounters": {
+			      "Binding": {
+			        "ConceptualEntity": "MatchHeroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match_hero": {
+			          "Target": {
+			            "Entity": "match_hero"
+			          }
+			        },
+			        "match.hero_encounters": {
+			          "Target": {
+			            "Entity": "match.hero_encounters"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match_hero"
+			            },
+			            "Object": {
+			              "Role": "match.hero_encounters"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_heroes_have_hero_encounters"
+			        }
+			      ]
+			    },
+			    "match_hero_has_match_hero_losses": {
+			      "Binding": {
+			        "ConceptualEntity": "MatchHeroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match_hero": {
+			          "Target": {
+			            "Entity": "match_hero"
+			          }
+			        },
+			        "match.hero_losses": {
+			          "Target": {
+			            "Entity": "match.hero_losses"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match_hero"
+			            },
+			            "Object": {
+			              "Role": "match.hero_losses"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_heroes_have_hero_losses"
+			        }
+			      ]
+			    },
+			    "match_hero_has_match_hero_loss_rate": {
+			      "Binding": {
+			        "ConceptualEntity": "MatchHeroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match_hero": {
+			          "Target": {
+			            "Entity": "match_hero"
+			          }
+			        },
+			        "match.hero_loss_rate": {
+			          "Target": {
+			            "Entity": "match.hero_loss_rate"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match_hero"
+			            },
+			            "Object": {
+			              "Role": "match.hero_loss_rate"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_heroes_have_hero_loss_rate"
+			        }
+			      ]
+			    },
+			    "match_hero_has_match_eligible_hero": {
+			      "Binding": {
+			        "ConceptualEntity": "MatchHeroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match_hero": {
+			          "Target": {
+			            "Entity": "match_hero"
+			          }
+			        },
+			        "match.eligible_hero": {
+			          "Target": {
+			            "Entity": "match.eligible_hero"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match_hero"
+			            },
+			            "Object": {
+			              "Role": "match.eligible_hero"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_heroes_have_eligible_hero"
+			        }
+			      ]
+			    },
+			    "match_hero_has_match_repeated_appearances": {
+			      "Binding": {
+			        "ConceptualEntity": "MatchHeroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match_hero": {
+			          "Target": {
+			            "Entity": "match_hero"
+			          }
+			        },
+			        "match.repeated_appearances": {
+			          "Target": {
+			            "Entity": "match.repeated_appearances"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match_hero"
+			            },
+			            "Object": {
+			              "Role": "match.repeated_appearances"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_heroes_have_repeated_appearances"
+			        }
+			      ]
+			    },
+			    "match_has_missing_recording_dates": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.missing_recording_dates": {
+			          "Target": {
+			            "Entity": "match.missing_recording_dates"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.missing_recording_dates"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_missing_recording_dates"
+			        }
+			      ]
+			    },
+			    "match_has_missing_scores": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "match.missing_scores": {
+			          "Target": {
+			            "Entity": "match.missing_scores"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match.missing_scores"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_missing_scores"
+			        }
+			      ]
+			    },
+			    "rejection_has_match_rejected_rows": {
+			      "Binding": {
+			        "ConceptualEntity": "Rejections"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "rejection": {
+			          "Target": {
+			            "Entity": "rejection"
+			          }
+			        },
+			        "match.rejected_rows": {
+			          "Target": {
+			            "Entity": "match.rejected_rows"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "rejection"
+			            },
+			            "Object": {
+			              "Role": "match.rejected_rows"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "rejections_have_rejected_rows"
+			        }
+			      ]
+			    },
+			    "match_hero_has_match_wilson_lower": {
+			      "Binding": {
+			        "ConceptualEntity": "MatchHeroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match_hero": {
+			          "Target": {
+			            "Entity": "match_hero"
+			          }
+			        },
+			        "match.wilson_lower": {
+			          "Target": {
+			            "Entity": "match.wilson_lower"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match_hero"
+			            },
+			            "Object": {
+			              "Role": "match.wilson_lower"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_heroes_have_wilson_lower"
+			        }
+			      ]
+			    },
+			    "match_hero_has_match_wilson_upper": {
+			      "Binding": {
+			        "ConceptualEntity": "MatchHeroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match_hero": {
+			          "Target": {
+			            "Entity": "match_hero"
+			          }
+			        },
+			        "match.wilson_upper": {
+			          "Target": {
+			            "Entity": "match.wilson_upper"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match_hero"
+			            },
+			            "Object": {
+			              "Role": "match.wilson_upper"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_heroes_have_wilson_upper"
+			        }
+			      ]
+			    },
+			    "match_hero_has_appearance_count": {
+			      "Binding": {
+			        "ConceptualEntity": "MatchHeroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match_hero": {
+			          "Target": {
+			            "Entity": "match_hero"
+			          }
+			        },
+			        "match_hero.appearance_count": {
+			          "Target": {
+			            "Entity": "match_hero.appearance_count"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match_hero"
+			            },
+			            "Object": {
+			              "Role": "match_hero.appearance_count"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_heroes_have_appearance_counts"
+			        }
+			      ]
+			    },
+			    "recording_date_has_recording_date_key": {
+			      "Binding": {
+			        "ConceptualEntity": "RecordingDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "recording_date": {
+			          "Target": {
+			            "Entity": "recording_date"
+			          }
+			        },
+			        "recording_date.recording_date_key": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date_key"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "recording_date"
+			            },
+			            "Object": {
+			              "Role": "recording_date.recording_date_key"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "recording_dates_have_recording_date_keys"
+			        }
+			      ]
+			    },
+			    "recording_date_has_recording_date": {
+			      "Binding": {
+			        "ConceptualEntity": "RecordingDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "recording_date": {
+			          "Target": {
+			            "Entity": "recording_date"
+			          }
+			        },
+			        "recording_date.recording_date": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "recording_date"
+			            },
+			            "Object": {
+			              "Role": "recording_date.recording_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "recording_dates_have_recording_dates"
+			        }
+			      ]
+			    },
+			    "rejection_has_source_row": {
+			      "Binding": {
+			        "ConceptualEntity": "Rejections"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "rejection": {
+			          "Target": {
+			            "Entity": "rejection"
+			          }
+			        },
+			        "rejection.source_row": {
+			          "Target": {
+			            "Entity": "rejection.source_row"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "rejection"
+			            },
+			            "Object": {
+			              "Role": "rejection.source_row"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "rejections_have_source_rows"
+			        }
+			      ]
+			    },
+			    "rejection_has_match_id": {
+			      "Binding": {
+			        "ConceptualEntity": "Rejections"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "rejection": {
+			          "Target": {
+			            "Entity": "rejection"
+			          }
+			        },
+			        "rejection.match_id": {
+			          "Target": {
+			            "Entity": "rejection.match_id"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "rejection"
+			            },
+			            "Object": {
+			              "Role": "rejection.match_id"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "rejections_have_match_ids"
+			        }
+			      ]
+			    },
+			    "rejection_has_reason": {
+			      "Binding": {
+			        "ConceptualEntity": "Rejections"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "rejection": {
+			          "Target": {
+			            "Entity": "rejection"
+			          }
+			        },
+			        "rejection.reason": {
+			          "Target": {
+			            "Entity": "rejection.reason"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "rejection"
+			            },
+			            "Object": {
+			              "Role": "rejection.reason"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "rejections_have_reasons"
+			        }
+			      ]
+			    },
+			    "import_summary_has_source_row": {
+			      "Binding": {
+			        "ConceptualEntity": "ImportSummary"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "import_summary": {
+			          "Target": {
+			            "Entity": "import_summary"
+			          }
+			        },
+			        "import_summary.source_row": {
+			          "Target": {
+			            "Entity": "import_summary.source_row"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "import_summary"
+			            },
+			            "Object": {
+			              "Role": "import_summary.source_row"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "import_summaries_have_source_rows"
+			        }
+			      ]
+			    },
+			    "import_summary_has_accepted_row": {
+			      "Binding": {
+			        "ConceptualEntity": "ImportSummary"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "import_summary": {
+			          "Target": {
+			            "Entity": "import_summary"
+			          }
+			        },
+			        "import_summary.accepted_row": {
+			          "Target": {
+			            "Entity": "import_summary.accepted_row"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "import_summary"
+			            },
+			            "Object": {
+			              "Role": "import_summary.accepted_row"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "import_summaries_have_accepted_rows"
+			        }
+			      ]
+			    },
+			    "import_summary_has_rejected_row": {
+			      "Binding": {
+			        "ConceptualEntity": "ImportSummary"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "import_summary": {
+			          "Target": {
+			            "Entity": "import_summary"
+			          }
+			        },
+			        "import_summary.rejected_row": {
+			          "Target": {
+			            "Entity": "import_summary.rejected_row"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "import_summary"
+			            },
+			            "Object": {
+			              "Role": "import_summary.rejected_row"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "import_summaries_have_rejected_rows"
+			        }
+			      ]
+			    },
+			    "match_has_recording_date": {
+			      "Binding": {
+			        "ConceptualEntity": "Matches"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        },
+			        "recording_date": {
+			          "Target": {
+			            "Entity": "recording_date"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "recording_date"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_recording_dates"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "recording_date"
+			            },
+			            "Object": {
+			              "Role": "match"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "recording_dates_have_matches"
+			        }
+			      ]
+			    },
+			    "match_hero_has_match": {
+			      "Binding": {
+			        "ConceptualEntity": "MatchHeroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match_hero": {
+			          "Target": {
+			            "Entity": "match_hero"
+			          }
+			        },
+			        "match": {
+			          "Target": {
+			            "Entity": "match"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match_hero"
+			            },
+			            "Object": {
+			              "Role": "match"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_heroes_have_matches"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match"
+			            },
+			            "Object": {
+			              "Role": "match_hero"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "matches_have_match_heroes"
+			        }
+			      ]
+			    },
+			    "match_hero_has_hero": {
+			      "Binding": {
+			        "ConceptualEntity": "MatchHeroes"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "match_hero": {
+			          "Target": {
+			            "Entity": "match_hero"
+			          }
+			        },
+			        "hero": {
+			          "Target": {
+			            "Entity": "hero"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "match_hero"
+			            },
+			            "Object": {
+			              "Role": "hero"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "match_heroes_have_heroes"
+			        },
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "hero"
+			            },
+			            "Object": {
+			              "Role": "match_hero"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "heroes_have_match_heroes"
+			        }
+			      ]
+			    },
+			    "recording_date_recording_date_has_date_hierarchy": {
+			      "Binding": {
+			        "ConceptualEntity": "RecordingDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "recording_date.recording_date": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date"
+			          }
+			        },
+			        "recording_date.recording_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date.date_hierarchy"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "recording_date.recording_date"
+			            },
+			            "Object": {
+			              "Role": "recording_date.recording_date.date_hierarchy"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "recording_dates_have_recording_date_hierarchies"
+			        }
+			      ]
+			    },
+			    "recording_date_recording_date_date_hierarchy_has_recording_date_recording_date_year": {
+			      "Binding": {
+			        "ConceptualEntity": "RecordingDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "recording_date.recording_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date.date_hierarchy"
+			          }
+			        },
+			        "recording_date.recording_date.year": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date.year"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "recording_date.recording_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "recording_date.recording_date.year"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "recording_date_hierarchies_have_recording_years"
+			        }
+			      ]
+			    },
+			    "recording_date_recording_date_date_hierarchy_has_recording_date_recording_date_quarter": {
+			      "Binding": {
+			        "ConceptualEntity": "RecordingDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "recording_date.recording_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date.date_hierarchy"
+			          }
+			        },
+			        "recording_date.recording_date.quarter": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date.quarter"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "recording_date.recording_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "recording_date.recording_date.quarter"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "recording_date_hierarchies_have_recording_quarters"
+			        }
+			      ]
+			    },
+			    "recording_date_recording_date_date_hierarchy_has_recording_date_recording_date_month": {
+			      "Binding": {
+			        "ConceptualEntity": "RecordingDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "recording_date.recording_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date.date_hierarchy"
+			          }
+			        },
+			        "recording_date.recording_date.month": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date.month"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "recording_date.recording_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "recording_date.recording_date.month"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "recording_date_hierarchies_have_recording_months"
+			        }
+			      ]
+			    },
+			    "recording_date_recording_date_date_hierarchy_has_recording_date_recording_date_day": {
+			      "Binding": {
+			        "ConceptualEntity": "RecordingDate"
+			      },
+			      "State": "Generated",
+			      "Roles": {
+			        "recording_date.recording_date.date_hierarchy": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date.date_hierarchy"
+			          }
+			        },
+			        "recording_date.recording_date.day": {
+			          "Target": {
+			            "Entity": "recording_date.recording_date.day"
+			          }
+			        }
+			      },
+			      "Phrasings": [
+			        {
+			          "Attribute": {
+			            "Subject": {
+			              "Role": "recording_date.recording_date.date_hierarchy"
+			            },
+			            "Object": {
+			              "Role": "recording_date.recording_date.day"
+			            }
+			          },
+			          "State": "Generated",
+			          "Weight": 0.99,
+			          "ID": "recording_date_hierarchies_have_recording_days"
+			        }
+			      ]
+			    }
+			  },
+			  "Agents": {
+			    "Internal": {
+			      "Version": "1.1.0"
+			    }
+			  }
+			}
+		contentType: json

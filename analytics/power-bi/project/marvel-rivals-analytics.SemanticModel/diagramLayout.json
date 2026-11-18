@@ -1,0 +1,100 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 50,
+            "y": 201.74014789770689
+          },
+          "nodeIndex": "Heroes",
+          "nodeLineageTag": "6fd2092d-933d-48b6-9988-fcea2f1b1a07",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1136.6221629171366,
+            "y": 101.87007394885347
+          },
+          "nodeIndex": "ImportSummary",
+          "nodeLineageTag": "c31a31d2-fa8f-4edc-82d9-611364bc340b",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 618.41040181545566,
+            "y": -50
+          },
+          "nodeIndex": "Matches",
+          "nodeLineageTag": "7281adaf-08d1-4c49-9e52-672bc9d49e7b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 334.20225510460887,
+            "y": 101.50798980944641
+          },
+          "nodeIndex": "MatchHeroes",
+          "nodeLineageTag": "caa8b259-a422-41ed-8592-4165d5e8fd0c",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 902.62216291713651,
+            "y": -34.378697769097982
+          },
+          "nodeIndex": "RecordingDate",
+          "nodeLineageTag": "62416d68-619d-44b0-ac3d-298ec121c2a5",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1420.6221629171366,
+            "y": 101.87007394885347
+          },
+          "nodeIndex": "Rejections",
+          "nodeLineageTag": "952b480e-b3c2-4800-950b-705b0e416fae",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}
