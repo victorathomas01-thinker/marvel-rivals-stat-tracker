@@ -25,4 +25,36 @@ Run `python analytics/power-bi/generate_fixture.py` from the repository root to 
 
 The date field records ingestion into the extension. Charts using it describe recording activity. Match occurrence time is unavailable in version 1 exports.
 
-Power BI report files, SQL transformations, and DAX are scheduled for later rounds. This folder currently contains the dataset and specification.
+## Round 2: reproducible preparation
+
+Requires Node.js 22+ and Python 3.12+ with SQLite JSON support (included in standard Python distributions). From the repository root:
+
+```sh
+python analytics/power-bi/build_model.py
+python -B -m unittest discover -s analytics/power-bi -p test_model.py -v
+```
+
+The build runs the extension validator, executes [SQL transformations](transform.sql), and writes ignored local `generated/model.sqlite` and `generated/model.json` files. Pass `--source PATH --output DIRECTORY` to process another export. Keep personal exports and their outputs outside tracked directories. Each build replaces the output model for one export; it does not combine players or append history.
+
+| Table | Grain / purpose | Fixture rows |
+| --- | --- | ---: |
+| Matches | One accepted match | 360 |
+| Heroes | One exact hero label | 12 |
+| MatchHeroes | One match–hero encounter, with AppearanceCount | 2,521 |
+| RecordingDate | One UTC recording date key, including Unknown | 91 |
+| Rejections | One rejected source row with match ID and reason | 0 |
+| ImportSummary | Source, accepted, and rejected row totals | 1 |
+
+Duplicate IDs quarantine **all** occurrences, avoiding arbitrary first-row selection. Invalid records use the extension's `readHistory` rules and receive `invalid_match_record`; duplicate IDs receive `duplicate_match_id`. SourceRow is one-based. Unsupported envelopes fail the whole build. No raw rejected payload is copied into the report. Empty hero arrays remain valid, matching the extension. Labels are not trimmed or normalized because the extension counts their exact values.
+
+RecordingDateKey derives from UTC, with a literal Unknown key for missing dates. The date dimension currently contains observed recording dates; a continuous calendar and time-intelligence measures are outside this round. The build checks 179 wins, 169 losses, 12 draws, 13 missing dates, 10 missing scores, and 33 repeated appearances. Tests compare all twelve heroes' decisive encounters, losses, rates, and Wilson bounds against the extension.
+
+### Load in Power BI Desktop
+
+Create a blank query named `ModelTables`. Paste [ModelTables.pq](ModelTables.pq) into Advanced Editor and replace ModelPath with the absolute generated JSON path. Disable load on this staging query. Create six reference queries named as above, each returning its record field, for example:
+
+```powerquery
+= ModelTables[Matches]
+```
+
+The adapter supplies explicit column names and types even for empty rejection or encounter tables. Refresh rereads the generated file; rerun the Python build first when the export changes. This adapter is authored but native Desktop import verification is pending Round 3. Relationships and DAX will be added in that round; report visuals and the native report file follow in Rounds 4–5.
